@@ -12,6 +12,7 @@ public class Ingredient implements Serializable {
     public Ingredient(Long id, String name) {
         this.id = id;
         Name = name;
+        //
     }
 
     @NotNull()
