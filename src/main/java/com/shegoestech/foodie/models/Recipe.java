@@ -1,7 +1,6 @@
 package com.shegoestech.foodie.models;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +16,7 @@ public class Recipe {
     private Long id;
 
     @NotBlank(message = "Recipe name is required", groups = {CreateValidation.class, UpdateValidation.class})
-    private String RecipeName;
+    private String recipeName;
 
     @NotBlank(message = "Type is required", groups = {CreateValidation.class, UpdateValidation.class})
     private String type;
