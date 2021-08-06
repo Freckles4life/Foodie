@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<form th:object="${recipe}" method="post" th:action="@{/recipes}">
+    <div class="form-group">
+        <label for="recipeName">Name of recipe</label>
+        <input type="text" class="form-control" id="recipeName" aria-describedby="recipeName" placeholder="Enter name of recipe" required th:field="*{recipeName}" >
+    </div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="Type" id="type1" value="Breakfast" th:field="*{type}">
+    <label class="form-check-label" for="type1">
+        Breakfast
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="Type" id="type2" value="Lunch" th:field="*{type}">
+    <label class="form-check-label" for="type2">
+        Lunch
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="Type" id="type3" value="Dinner" th:field="*{type}">
+    <label class="form-check-label" for="type3">
+        Dinner
+    </label>
+</div>
+<div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Ingredients:">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Amount:">
+        </div>
+    </div>
+   <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Ingredients:">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Amount:">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Ingredients:">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Amount:">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Ingredients:">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Amount:">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Ingredients:">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Amount:">
+        </div>
+    </div>
+<div class="form-group">
+    <label for="recipeInstructions" >Instructions for recipe:</label>
+    <textarea class="form-control" id="recipeInstructions" rows="10" required th:field="*{recipeInstructions}"></textarea>
+</div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
 
 </body>
 </html>
