@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/recipe")
+@RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
 
@@ -25,7 +25,7 @@ public class RecipeController {
         return "index";
     }
 
-    @GetMapping("/recipe-add")
+    @GetMapping("/add-recipe")
     public String signUp(Model map, Recipe recipe) {
         map.addAttribute("pageName", "Add New Recipe");
 
@@ -43,7 +43,7 @@ public class RecipeController {
         model.addAttribute("pageName", "Edit New Recipe");
 
         Recipe recipe = recipeService.getById(id);
-        model.addAttribute("recipe", recipe);
+        model.addAttribute("recipes", recipe);
 
         return "recipe-edit";
     }
@@ -51,7 +51,7 @@ public class RecipeController {
     @PostMapping
     public String register(@Valid Recipe recipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "recipe-add";
+            return "add-recipe";
         }
 
         recipeService.register(recipe);

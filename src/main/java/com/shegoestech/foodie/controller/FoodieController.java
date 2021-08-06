@@ -18,10 +18,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/foodie")
 public class FoodieController {
-    /*private final IngredientService ingredientService;
+    private final IngredientService ingredientService;
     private final RecipeService recipeService;
 
-
+    /*
     @GetMapping("/ingredient")
     public String ingredients() {
         throw new NotFoundException("We can't find any ingredient");
@@ -30,22 +30,22 @@ public class FoodieController {
     @GetMapping("/recipes")
     public String recipes() {
         throw new NotFoundException("We can't find any recipes");
-    }
+    }*/
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("ingredients", ingredientService.getAll());
+    public String GetHomePage(Model model) {
+        /*model.addAttribute("ingredients", ingredientService.getAll()); */
         return "index";
     }
 
-    @GetMapping
+   /* @GetMapping
     public String index(Model model) {
         model.addAttribute("recipe", recipeService.getAll());
         return "index";
     }
+    */
 
 
 
-*/
 
 }
