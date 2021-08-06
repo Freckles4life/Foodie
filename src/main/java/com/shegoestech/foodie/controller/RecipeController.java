@@ -29,7 +29,7 @@ public class RecipeController {
     public String signUp(Model map, Recipe recipe) {
         map.addAttribute("pageName", "Add New Recipe");
 
-        return "recipe-add";
+        return "add-recipe";
     }
 
     @GetMapping("/delete/{id}")
