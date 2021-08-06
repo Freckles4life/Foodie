@@ -21,6 +21,7 @@ public class IngredientService {
                 .orElseThrow(() -> new RuntimeException("Ingredient not found"));
     }
 
+    //šo iespējams nevajadzēs
     public Ingredient update(Long id, Ingredient ingredient) {
         Ingredient existingIngredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ingredient not found"));
@@ -34,6 +35,7 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
+    //šo iespējams nevajadzēs
     public void deleteById(Long id) {
         ingredientRepository.deleteById(id);
     }

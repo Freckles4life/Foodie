@@ -21,6 +21,7 @@ public class RecipeService {
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
     }
 
+    //šo iespējams nevajadzēs
     public Recipe update(Long id, Recipe recipe) {
         Recipe existingRecipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));
@@ -36,6 +37,7 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    //šo iespējams nevajadzēs
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
     }
