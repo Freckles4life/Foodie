@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose ingredients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <div align="center">
+      <h1> This is your todays menu!</h1>
+      <h2>Breakfast</h2>
+      <p th:text="${th:text=${breakfast.recipeName}"></p>
+      <p th:text="${th:text=${breakfast.recipeInstructions}"></p>
+
+      <h2>Lunch</h2>
+      <p th:text="${th:text=${lunch.recipeName}"></p>
+      <p th:text="${th:text=${lunch.recipeInstructions}"></p>
+
+      <h2>Dinner</h2>
+      <p th:text="${th:text=${dinner.recipeName}"></p>
+      <p th:text="${th:text=${dinner.recipeInstructions}"></p>
+</div>
+</body>
+</html>

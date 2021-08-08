@@ -1,23 +1,44 @@
 package com.shegoestech.foodie.controller;
 
+import com.shegoestech.foodie.models.ChooseIngredients;
+import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
+
+    @GetMapping("/show-recipes")
+    public String showRecipes( Model model, @ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients){
+        List<Recipe> recipes = recipeService.getAll();
+        List<Recipe> breakfast = recipes.stream().filter(r-> r.getType() == "Breakfast").collect(Collectors.toList());
+        List<Recipe> lunch = recipes.stream().filter(r-> r.getType() == "Lunch").collect(Collectors.toList());
+        List<Recipe> dinner = recipes.stream().filter(r-> r.getType() == "Dinner").collect(Collectors.toList());
+
+        Random rand = new Random();
+        Recipe randomBreakfast = breakfast.get(rand.nextInt(breakfast.size()));
+        Recipe randomLunch = lunch.get(rand.nextInt(lunch.size()));
+        Recipe randomDinner = dinner.get(rand.nextInt(dinner.size()));
+
+        model.addAttribute("breakfast", randomBreakfast);
+        model.addAttribute("lunch", randomLunch);
+        model.addAttribute("dinner", randomDinner);
+        return "show-recipes";
+    }
 
     @GetMapping
     public String index(Model model) {
