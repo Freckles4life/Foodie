@@ -12,17 +12,17 @@ import javax.validation.constraints.NotNull;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(groups = UpdateValidation.class)
+    @NotNull
     private Long id;
 
-    @NotBlank(message = "Recipe name is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank(message = "Recipe name is required")
     private String recipeName;
 
-    @NotBlank(message = "Type is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank(message = "Type is required")
     private String type;
 
     @Column(columnDefinition = "TEXT")
-    @NotBlank(message = "Recipe instructions is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank(message = "Recipe instructions is required")
     private String recipeInstructions;
 
 }

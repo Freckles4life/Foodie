@@ -11,15 +11,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class Ingredient /*implements Serializable*/ {
 
-    /*public Ingredient(Long id, String ingredientName) {
-        this.id = id;
-        this.ingredientName = ingredientName;
-        //
-    }*/
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(groups = UpdateValidation.class)
+    @NotNull
     private Long id;
 
     @NotBlank()

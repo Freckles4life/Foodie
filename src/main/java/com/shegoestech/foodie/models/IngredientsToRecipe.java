@@ -13,19 +13,19 @@ public class IngredientsToRecipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull(groups = UpdateValidation.class)
+    @NotNull
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
-    @NotBlank(message = "Recipe id is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank
     private Recipe recipe;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    @NotBlank(message = "Ingredient id is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotBlank
     private Ingredient ingredient;
 
-    @NotBlank(message = "Amount is required", groups = {CreateValidation.class, UpdateValidation.class})
+    @NotNull
     private Long amount;
 }
