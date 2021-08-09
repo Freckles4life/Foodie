@@ -3,6 +3,7 @@ package com.shegoestech.foodie.controller;
 import com.shegoestech.foodie.models.ChooseIngredients;
 import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.models.Recipe;
+import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,38 @@ import java.util.stream.Collectors;
 @RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
+    private final IngredientService ingredientService;
+    private final ChooseIngredients chooseIngredients;
+
+
+    @GetMapping("/choose-ingredients-2")
+    public String showIngredients(Model model){
+        model.addAttribute("chooseIngredients", chooseIngredients);
+        List<Ingredient> ingredients = ingredientService.getAll();
+
+        model.addAttribute("ingredients", ingredients);
+
+        return "choose-ingredients-2";
+    }
+
+    @GetMapping("/add-recipe")
+    public String signUp(Model map, Recipe recipe) {
+        map.addAttribute("pageName", "Add New Recipe");
+
+        return "add-recipe";
+    }
+
+
+    @PostMapping
+    public String register(@Valid Recipe recipe, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-recipe";
+        }
+
+        recipeService.register(recipe);
+
+        return "success";
+    }
 
     @GetMapping("/show-recipes")
     public String showRecipes( Model model, @ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients){
@@ -40,54 +73,46 @@ public class RecipeController {
         return "show-recipes";
     }
 
-    @GetMapping
-    public String index(Model model) {
-        model.addAttribute("recipes", recipeService.getAll());
-        return "index";
-    }
 
-    @GetMapping("/add-recipe")
-    public String signUp(Model map, Recipe recipe) {
-        map.addAttribute("pageName", "Add New Recipe");
 
-        return "add-recipe";
-    }
 
-    @GetMapping("/delete/{id}")
-    public String deleteById(@PathVariable("id") Long id, Model model) {
-        recipeService.deleteById(id);
-        return index(model);
-    }
 
-    @GetMapping("/edit/{id}")
-    public String editById(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("pageName", "Edit New Recipe");
 
-        Recipe recipe = recipeService.getById(id);
-        model.addAttribute("recipes", recipe);
 
-        return "recipe-edit";
-    }
 
-    @PostMapping
-    public String register(@Valid Recipe recipe, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-recipe";
-        }
 
-        recipeService.register(recipe);
+    //    @GetMapping
+//    public String index(Model model) {
+//        model.addAttribute("recipes", recipeService.getAll());
+//        return "index";
+////    }
+//    @GetMapping("/delete/{id}")
+//    public String deleteById(@PathVariable("id") Long id, Model model) {
+//        recipeService.deleteById(id);
+//        return index(model);
+//    }
+//
+//    @GetMapping("/edit/{id}")
+//    public String editById(@PathVariable("id") Long id, Model model) {
+//        model.addAttribute("pageName", "Edit New Recipe");
+//
+//        Recipe recipe = recipeService.getById(id);
+//        model.addAttribute("recipes", recipe);
+//
+//        return "recipe-edit";
+//    }
 
-        return index(model);
-    }
 
-    @PostMapping("/update/{id}")
-    public String updateRecipe(@PathVariable("id") Long id, @Valid Recipe recipe, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "recipe-edit";
-        }
+//
+//    @PostMapping("/update/{id}")
+//    public String updateRecipe(@PathVariable("id") Long id, @Valid Recipe recipe, BindingResult result, Model model) {
+//        if (result.hasErrors()) {
+//            return "recipe-edit";
+//        }
+//
+//        recipeService.update(id, recipe);
+//
+//        return index(model);
+//    }
 
-        recipeService.update(id, recipe);
-
-        return index(model);
-    }
 }

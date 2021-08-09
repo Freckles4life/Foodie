@@ -17,16 +17,6 @@ public class FoodieController {
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
 
-    /*
-    @GetMapping("/ingredient")
-    public String ingredients() {
-        throw new NotFoundException("We can't find any ingredient");
-    }
-
-    @GetMapping("/recipes")
-    public String recipes() {
-        throw new NotFoundException("We can't find any recipes");
-    }*/
 
     @GetMapping
     public String GetHomePage(Model model) {
@@ -39,7 +29,17 @@ public class FoodieController {
         model.addAttribute("recipe", recipeService.getAll());
         return "index";
     }
-    */
+
+
+    @GetMapping("/ingredient")
+    public String ingredients() {
+        throw new NotFoundException("We can't find any ingredient");
+    }
+
+    @GetMapping("/recipes")
+    public String recipes() {
+        throw new NotFoundException("We can't find any recipes");
+    }*/
 
 
 
