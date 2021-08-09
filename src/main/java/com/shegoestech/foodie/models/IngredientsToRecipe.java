@@ -16,12 +16,16 @@ public class IngredientsToRecipe {
     @NotNull(groups = UpdateValidation.class)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
     @NotBlank(message = "Recipe id is required", groups = {CreateValidation.class, UpdateValidation.class})
-    private Long RecipeId;
+    private Recipe recipe;
 
+    @ManyToOne
+    @JoinColumn(name = "ingredient_id")
     @NotBlank(message = "Ingredient id is required", groups = {CreateValidation.class, UpdateValidation.class})
-    private Long IngredientId;
+    private Ingredient ingredient;
 
     @NotBlank(message = "Amount is required", groups = {CreateValidation.class, UpdateValidation.class})
-    private Long Amount;
+    private Long amount;
 }

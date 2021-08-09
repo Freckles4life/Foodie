@@ -21,6 +21,7 @@ public class Recipe {
     @NotBlank(message = "Type is required", groups = {CreateValidation.class, UpdateValidation.class})
     private String type;
 
+    @Column(columnDefinition = "TEXT")
     @NotBlank(message = "Recipe instructions is required", groups = {CreateValidation.class, UpdateValidation.class})
     private String recipeInstructions;
 
