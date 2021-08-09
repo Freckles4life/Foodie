@@ -24,4 +24,7 @@ public class Ingredient /*implements Serializable*/ {
 
     @NotBlank()
     private String ingredientName;
+
+    @NotBlank()
+    private String ingredientMeasure;
 }
