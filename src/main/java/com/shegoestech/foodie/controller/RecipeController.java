@@ -26,14 +26,14 @@ public class RecipeController {
     private final ChooseIngredients chooseIngredients;
 
 
-    @GetMapping("/choose-ingredients-2")
+    @GetMapping("/recipe-ingredients")
     public String showIngredients(Model model){
         model.addAttribute("chooseIngredients", chooseIngredients);
         List<Ingredient> ingredients = ingredientService.getAll();
 
         model.addAttribute("ingredients", ingredients);
 
-        return "choose-ingredients-2";
+        return "recipe-ingredients";
     }
 
     @GetMapping("/add-recipe")
