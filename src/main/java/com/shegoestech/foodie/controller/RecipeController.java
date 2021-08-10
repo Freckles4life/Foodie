@@ -6,10 +6,12 @@ import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -55,22 +57,27 @@ public class RecipeController {
         return "success";
     }
 
-    @GetMapping("/show-recipes")
-    public String showRecipes( Model model, @ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients){
+    @GetMapping("/menu")
+    public ModelAndView showMenu(ChooseIngredients  chooseIngredients){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("menu");
+
         List<Recipe> recipes = recipeService.getAll();
-        List<Recipe> breakfast = recipes.stream().filter(r-> r.getType() == "Breakfast").collect(Collectors.toList());
-        List<Recipe> lunch = recipes.stream().filter(r-> r.getType() == "Lunch").collect(Collectors.toList());
-        List<Recipe> dinner = recipes.stream().filter(r-> r.getType() == "Dinner").collect(Collectors.toList());
+        List<Recipe> breakfast = recipes.stream().filter(r -> r.getType().equals("Breakfast")).collect(Collectors.toList());
+        List<Recipe> lunch = recipes.stream().filter(r-> r.getType().equals("Lunch")).collect(Collectors.toList());
+        List<Recipe> dinner = recipes.stream().filter(r-> r.getType().equals("Dinner")).collect(Collectors.toList());
 
         Random rand = new Random();
+
         Recipe randomBreakfast = breakfast.get(rand.nextInt(breakfast.size()));
         Recipe randomLunch = lunch.get(rand.nextInt(lunch.size()));
         Recipe randomDinner = dinner.get(rand.nextInt(dinner.size()));
 
-        model.addAttribute("breakfast", randomBreakfast);
-        model.addAttribute("lunch", randomLunch);
-        model.addAttribute("dinner", randomDinner);
-        return "show-recipes";
+        mv.addObject("breakfast", randomBreakfast);
+        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
+        mv.addObject("lunch", randomLunch);
+        mv.addObject("dinner", randomDinner);
+        return mv;
     }
 
 
