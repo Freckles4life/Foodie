@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Table
 @Entity
@@ -13,7 +14,7 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long id;
+    public Long id;
 
     @NotBlank(message = "Recipe name is required")
     private String recipeName;
@@ -24,5 +25,8 @@ public class Recipe {
     @Column(columnDefinition = "TEXT")
     @NotBlank(message = "Recipe instructions is required")
     private String recipeInstructions;
+
+    @OneToMany(mappedBy = "ingredient")
+    private Collection<IngredientAmounts> ingredientAmounts;
 
 }

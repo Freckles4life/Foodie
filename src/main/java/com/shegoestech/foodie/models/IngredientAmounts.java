@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table
 @Entity
 @Data
-public class IngredientsToRecipe {
+public class IngredientAmounts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

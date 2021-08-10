@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Table
 @Entity
@@ -21,4 +22,7 @@ public class Ingredient /*implements Serializable*/ {
 
     @NotBlank()
     private String ingredientMeasure;
+
+    @OneToMany(mappedBy = "recipe")
+    private Collection<IngredientAmounts> ingredientAmounts;
 }
