@@ -8,14 +8,14 @@
 </head>
 
 <body>
-<h1> Please, choose the ingredients for your recipe</h1>
+<h1>Choose ingredients of your recipe</h1>
 <div class="dropdown">
-    <form action="#" method="post" th:action="@{/recipes/add-recipe}" th:object="${ingredients}">
+    <form action="#" method="post" th:action="@{/recipes/add-recipe}" th:object="${ingredient}">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Choose product
   </button>
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" th:each="i : ${ingredients}">
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" th:each="i : ${ingredient}">
     <li><a class="dropdown-item" th:text="${i.ingredientName}"></a></li>
    </ul>
         <button type="submit" >Submit</button>
