@@ -1,8 +1,10 @@
 package com.shegoestech.foodie.controller;
 
 import com.shegoestech.foodie.models.ChooseIngredients;
+import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.models.IngredientAmounts;
 import com.shegoestech.foodie.models.Recipe;
+import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,12 +25,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
-
+    private final IngredientService ingredientService;
+    private final ChooseIngredients chooseIngredients;
 
     @GetMapping("/recipe-ingredients")
-    public String chooseIngredientsForRecipe(Model model, Recipe recipe){
+    //public String chooseIngredientsForRecipe(Model model, Recipe recipe)
+    public String chooseIngredientsForRecipe(Model model){
+        model.addAttribute("chooseIngredients", chooseIngredients);
+        List<Ingredient> ingredients = ingredientService.getAll();
+
+        model.addAttribute("ingredients", ingredients);
 
         return "recipe-ingredients";
+    }
+
+    @PostMapping("/recipe-ingredients")
+    public String submitIngredients(Model model, Recipe recipes) {
+        return "add-recipe";
     }
 
     @GetMapping("/add-recipe")
