@@ -23,7 +23,7 @@ public class Recipe {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
     @NotBlank(message = "Recipe name is required")
