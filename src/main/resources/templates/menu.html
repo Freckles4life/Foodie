@@ -9,8 +9,8 @@
   <div align="center">
       <h1> This is your today's menu!</h1>
       <h2>Breakfast</h2>
-      <p th:object="${breakfast}" th:text="${breakfast.recipeName}"></p>
-      <p th:object="${breakfast}" th:text="${breakfast.recipeInstructions}"></p>
+      <p  th:text="${breakfast.recipeName}"></p>
+      <p  th:text="${breakfast.recipeInstructions}"></p>
       <p>Ingredients:</p>
       <div th:each="i : ${breakfastIngredients}">
           <span  th:text="${i.ingredient.ingredientName}"></span> <span th:text="${i.amount}"></span> <span th:text="${i.ingredient.ingredientMeasure}"></span>
@@ -19,11 +19,16 @@
       <h2>Lunch</h2>
       <p th:text="${lunch.recipeName}"></p>
       <p th:text="${lunch.recipeInstructions}"></p>
-
+      <div th:each="i : ${lunchIngredients}">
+          <span  th:text="${i.ingredient.ingredientName}"></span> <span th:text="${i.amount}"></span> <span th:text="${i.ingredient.ingredientMeasure}"></span>
+      </div>
 
       <h2>Dinner</h2>
       <p th:text="${dinner.recipeName}"></p>
       <p th:text="${dinner.recipeInstructions}"></p>
+      <div th:each="i : ${dinnerIngredients}">
+          <span  th:text="${i.ingredient.ingredientName}"></span> <span th:text="${i.amount}"></span> <span th:text="${i.ingredient.ingredientMeasure}"></span>
+      </div>
 </div>
 </body>
 </html>

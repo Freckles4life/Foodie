@@ -23,6 +23,6 @@ public class Ingredient /*implements Serializable*/ {
     @NotBlank()
     private String ingredientMeasure;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "ingredient")
     private Collection<IngredientAmounts> ingredientAmounts;
 }
