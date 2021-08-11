@@ -13,7 +13,6 @@ import java.util.Collection;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     public Long id;
 
     @NotBlank(message = "Recipe name is required")

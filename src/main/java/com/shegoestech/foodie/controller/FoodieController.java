@@ -19,10 +19,11 @@ public class FoodieController {
 
 
     @GetMapping
-    public String GetHomePage(Model model) {
-        /*model.addAttribute("ingredients", ingredientService.getAll()); */
+    public String index(Model model) {
         return "index";
     }
+
+
 
    /* @GetMapping
     public String index(Model model) {

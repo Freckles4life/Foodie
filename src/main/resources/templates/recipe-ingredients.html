@@ -10,7 +10,7 @@
 <body>
 <h1> Please, choose the ingredients for your recipe</h1>
 <div class="dropdown">
-    <form action="#" method="post" th:action="@{/recipes/add-recipe}" th:object="${chooseIngredients}">
+    <form action="#" method="post" th:action="@{/recipes/add-recipe}" th:object="${ingredients}">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Choose product
   </button>
@@ -18,7 +18,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" th:each="i : ${ingredients}">
     <li><a class="dropdown-item" th:text="${i.ingredientName}"></a></li>
    </ul>
-        <button type="submit" ><a href="menu">Submit</a></button>
+        <button type="submit" >Submit</button>
 
     </form>
 </div>

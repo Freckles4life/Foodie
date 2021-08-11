@@ -26,6 +26,7 @@ public class RecipeController {
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
     private final ChooseIngredients chooseIngredients;
+    private final FoodieController foodieController;
 
 
     @GetMapping("/recipe-ingredients")
@@ -38,88 +39,59 @@ public class RecipeController {
         return "recipe-ingredients";
     }
 
-    @GetMapping("/add-recipe")
-    public String signUp(Model map, Recipe recipe) {
-        map.addAttribute("pageName", "Add New Recipe");
 
+    @GetMapping("/add-recipe")
+    public String addRecipeInstructions(Model map) {
+        map.addAttribute("pageName", "Add Recipe Instructions");
+        map.addAttribute("recipe", new Recipe());
         return "add-recipe";
+    }
+
+    @GetMapping("/success")
+    public String success(Model map) {
+        map.addAttribute("pageName", "You succeeded!");
+        return "success";
     }
 
 
     @PostMapping
-    public String register(@Valid Recipe recipe, BindingResult result, Model model) {
+    public String saveRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-recipe";
         }
-
         recipeService.register(recipe);
-
         return "success";
     }
 
-    @GetMapping("/menu")
-    public ModelAndView showMenu(ChooseIngredients  chooseIngredients){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("menu");
-
-        List<Recipe> recipes = recipeService.getAll();
-        List<Recipe> breakfast = recipes.stream().filter(r -> r.getType().equals("Breakfast")).collect(Collectors.toList());
-        List<Recipe> lunch = recipes.stream().filter(r-> r.getType().equals("Lunch")).collect(Collectors.toList());
-        List<Recipe> dinner = recipes.stream().filter(r-> r.getType().equals("Dinner")).collect(Collectors.toList());
-
-        Random rand = new Random();
-
-        Recipe randomBreakfast = breakfast.get(rand.nextInt(breakfast.size()));
-        Recipe randomLunch = lunch.get(rand.nextInt(lunch.size()));
-        Recipe randomDinner = dinner.get(rand.nextInt(dinner.size()));
-
-        mv.addObject("breakfast", randomBreakfast);
-        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
-        mv.addObject("lunch", randomLunch);
-        mv.addObject("dinner", randomDinner);
-        return mv;
-    }
-
-
-
-
-
-
-
-
-
-    //    @GetMapping
-//    public String index(Model model) {
-//        model.addAttribute("recipes", recipeService.getAll());
-//        return "index";
-////    }
-//    @GetMapping("/delete/{id}")
-//    public String deleteById(@PathVariable("id") Long id, Model model) {
-//        recipeService.deleteById(id);
-//        return index(model);
-//    }
+//    @GetMapping("/menu")
+//    public ModelAndView showMenu(ChooseIngredients  chooseIngredients){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("menu");
 //
-//    @GetMapping("/edit/{id}")
-//    public String editById(@PathVariable("id") Long id, Model model) {
-//        model.addAttribute("pageName", "Edit New Recipe");
+//        List<Recipe> recipes = recipeService.getAll();
+//        List<Recipe> breakfast = recipes.stream().filter(r -> r.getType().equals("Breakfast")).collect(Collectors.toList());
+//        List<Recipe> lunch = recipes.stream().filter(r-> r.getType().equals("Lunch")).collect(Collectors.toList());
+//        List<Recipe> dinner = recipes.stream().filter(r-> r.getType().equals("Dinner")).collect(Collectors.toList());
 //
-//        Recipe recipe = recipeService.getById(id);
-//        model.addAttribute("recipes", recipe);
+//        Random rand = new Random();
 //
-//        return "recipe-edit";
+//        Recipe randomBreakfast = breakfast.get(rand.nextInt(breakfast.size()));
+//        Recipe randomLunch = lunch.get(rand.nextInt(lunch.size()));
+//        Recipe randomDinner = dinner.get(rand.nextInt(dinner.size()));
+//
+//        mv.addObject("breakfast", randomBreakfast);
+//        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
+//        mv.addObject("lunch", randomLunch);
+//        mv.addObject("dinner", randomDinner);
+//        return mv;
 //    }
 
 
-//
-//    @PostMapping("/update/{id}")
-//    public String updateRecipe(@PathVariable("id") Long id, @Valid Recipe recipe, BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "recipe-edit";
-//        }
-//
-//        recipeService.update(id, recipe);
-//
-//        return index(model);
-//    }
+
+
+
+
+
+
 
 }

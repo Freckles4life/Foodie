@@ -2,15 +2,21 @@ package com.shegoestech.foodie.controller;
 
 import com.shegoestech.foodie.models.ChooseIngredients;
 import com.shegoestech.foodie.models.Ingredient;
+import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.service.IngredientService;
+import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -18,6 +24,7 @@ import java.util.List;
 public class IngredientController {
     private final IngredientService ingredientService;
     private final ChooseIngredients chooseIngredients;
+    private final RecipeService recipeService;
 
     @Autowired
     private final RecipeController recipeController;
@@ -34,8 +41,39 @@ public class IngredientController {
 
     @PostMapping("/choose-ingredients")
     public ModelAndView  submitIngredients(@ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients) {
-        return recipeController.showMenu(chooseIngredients);
+        return showMenu(chooseIngredients);
     }
+
+//    @PostMapping
+//    public String submitIngredients(@ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients){
+//
+//        return "menu";
+//    }
+
+    @GetMapping("/menu")
+    public ModelAndView showMenu(ChooseIngredients  chooseIngredients){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("menu");
+
+        List<Recipe> recipes = recipeService.getAll();
+        List<Recipe> breakfast = recipes.stream().filter(r -> r.getType().equals("Breakfast")).collect(Collectors.toList());
+        List<Recipe> lunch = recipes.stream().filter(r-> r.getType().equals("Lunch")).collect(Collectors.toList());
+        List<Recipe> dinner = recipes.stream().filter(r-> r.getType().equals("Dinner")).collect(Collectors.toList());
+
+        Random rand = new Random();
+
+        Recipe randomBreakfast = breakfast.get(rand.nextInt(breakfast.size()));
+        Recipe randomLunch = lunch.get(rand.nextInt(lunch.size()));
+        Recipe randomDinner = dinner.get(rand.nextInt(dinner.size()));
+
+        mv.addObject("breakfast", randomBreakfast);
+        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
+        mv.addObject("lunch", randomLunch);
+        mv.addObject("dinner", randomDinner);
+        return mv;
+    }
+
+
 
 
 
