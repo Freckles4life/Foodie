@@ -11,6 +11,17 @@ import java.util.Collection;
 @Entity
 @Data
 public class Recipe {
+
+    public Recipe()
+    {
+
+    }
+
+    public Recipe(String recipeName, Collection<IngredientAmounts> ingredientAmounts) {
+        this.recipeName = recipeName;
+        this.ingredientAmounts = ingredientAmounts;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -25,7 +36,7 @@ public class Recipe {
     @NotBlank(message = "Recipe instructions is required")
     private String recipeInstructions;
 
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "recipe")
     private Collection<IngredientAmounts> ingredientAmounts;
 
 }
