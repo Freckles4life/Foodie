@@ -16,8 +16,12 @@
   </button>
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" th:each="i : ${ingredient}">
-    <li><a class="dropdown-item" th:text="${i.ingredientName}"></a></li>
-   </ul>
+    <li><a class="dropdown-item" ></a>1</li>
+      <li><a class="dropdown-item" th:text="${i.ingredientName}"></a>2</li>
+      <li><a class="dropdown-item" th:text="${i.ingredientName}"></a>3</li>
+
+
+  </ul>
         <button type="submit" >Submit</button>
 
     </form>

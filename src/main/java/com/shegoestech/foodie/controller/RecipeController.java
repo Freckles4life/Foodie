@@ -27,6 +27,7 @@ public class RecipeController {
 
     @GetMapping("/recipe-ingredients")
     public String chooseIngredientsForRecipe(Model model, Recipe recipe){
+
         return "recipe-ingredients";
     }
 
