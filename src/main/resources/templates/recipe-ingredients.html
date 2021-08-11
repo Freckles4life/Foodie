@@ -4,10 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe Ingredients</title>
+    <style>
+         body {
+ background-image:https://cdn.pixabay.com/photo/2018/07/31/07/55/tomatoes-3574427_960_720.jpg";
+ }
+ h1{
+ text-align: center;
+            color: #007A43;
+            font-family:"Lucida Console";
+            margin: 30px 50px 75px 100px;
+            font-size:70px;
+            }
+
+
+
+    </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
+<br>
+<br>
+<br>
 <h1>Choose ingredients of your recipe</h1>
 <div class="dropdown">
     <form action="#" method="post" th:action="@{/recipes/add-recipe}" th:object="${ingredient}">
