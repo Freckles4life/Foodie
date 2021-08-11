@@ -5,7 +5,7 @@
 </head>
 <body class="container">
 <h1>Add instructions of your recipe!</h1>
-<form th:object="${recipe}" method="post" th:action="@{/recipes/success}">
+<form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}">
     <div class="mb-3">
         <label for="recipeName" class="form-label">Recipe name</label>
         <input type="text" class="form-control" th:field="*{recipeName}" id="recipeName" aria-describedby="emailHelp">
@@ -30,7 +30,7 @@
     </div>
     <div class="mb-3">
         <label for="recipeInstructions" class="form-label">Recipe instructions</label>
-        <textarea class="form-control" id="recipeInstructions" rows="5"></textarea>
+        <textarea class="form-control" id="recipeInstructions" rows="5" th:field="*{recipeInstructions}"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 
