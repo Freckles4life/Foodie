@@ -3,6 +3,7 @@ package com.shegoestech.foodie.service;
 import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class IngredientService {
     }
 
     public List<Ingredient> getAll() {
-        return ingredientRepository.findAll();
+        return ingredientRepository.findAll(Sort.by(Sort.Direction.ASC, "ingredientName"));
     }
 
     //šo iespējams nevajadzēs
