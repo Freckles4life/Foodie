@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -104,12 +105,10 @@ public class RecipeController {
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
 
-        mv.addObject("breakfast", randomBreakfast);
-        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
-        mv.addObject("lunch", randomLunch);
-        mv.addObject("lunchIngredients", randomLunch.getIngredientAmounts());
-        mv.addObject("dinner", randomDinner);
-        mv.addObject("dinnerIngredients", randomDinner.getIngredientAmounts());
+        List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast,randomLunch, randomDinner));
+
+        mv.addObject("recipes",recipeMenu);
+
         return mv;
     }
 
