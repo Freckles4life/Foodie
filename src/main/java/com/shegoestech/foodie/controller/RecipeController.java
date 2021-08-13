@@ -1,8 +1,10 @@
 package com.shegoestech.foodie.controller;
 
 import com.shegoestech.foodie.models.ChooseIngredients;
+import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.models.IngredientAmounts;
 import com.shegoestech.foodie.models.Recipe;
+import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -23,11 +26,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/recipes")
 public class RecipeController {
     private final RecipeService recipeService;
-
+    private final IngredientService ingredientService;
+    private final ChooseIngredients chooseIngredients;
 
     @GetMapping("/recipe-ingredients")
-    public String chooseIngredientsForRecipe(Model model, Recipe recipe){
+    //public String chooseIngredientsForRecipe(Model model, Recipe recipe)
+    public String chooseIngredientsForRecipe(Model model){
+        model.addAttribute("chooseIngredients", chooseIngredients);
+        List<Ingredient> ingredients = ingredientService.getAll();
+
+        model.addAttribute("ingredients", ingredients);
+
         return "recipe-ingredients";
+    }
+
+    @PostMapping("/recipe-ingredients")
+    public String submitIngredients(Model model, Recipe recipes) {
+        return "add-recipe";
     }
 
     @GetMapping("/add-recipe")
@@ -39,6 +54,11 @@ public class RecipeController {
     @GetMapping("/success")
     public String success(Model model, Recipe recipe) {
         return "success";
+    }
+
+    @GetMapping("/menu-test")
+    public String menu2(Model model, Recipe recipe) {
+        return "menu-test";
     }
 
 
@@ -89,12 +109,10 @@ public class RecipeController {
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
 
-        mv.addObject("breakfast", randomBreakfast);
-        mv.addObject("breakfastIngredients", randomBreakfast.getIngredientAmounts());
-        mv.addObject("lunch", randomLunch);
-        mv.addObject("lunchIngredients", randomLunch.getIngredientAmounts());
-        mv.addObject("dinner", randomDinner);
-        mv.addObject("dinnerIngredients", randomDinner.getIngredientAmounts());
+        List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast,randomLunch, randomDinner));
+
+        mv.addObject("recipes",recipeMenu);
+
         return mv;
     }
 

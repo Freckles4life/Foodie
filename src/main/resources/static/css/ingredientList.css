@@ -1,0 +1,14 @@
+.ingredientList{
+    width: 90vw;
+    height: 80vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.ingredient{
+    order: 10;
+    width: fit-content;
+}
