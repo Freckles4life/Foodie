@@ -56,6 +56,11 @@ public class RecipeController {
         return "success";
     }
 
+    @GetMapping("/menu-test")
+    public String menu2(Model model, Recipe recipe) {
+        return "menu-test";
+    }
+
 
 
     @PostMapping("/add-recipe")
