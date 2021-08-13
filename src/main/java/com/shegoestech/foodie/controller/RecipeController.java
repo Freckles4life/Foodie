@@ -30,12 +30,9 @@ public class RecipeController {
     private final ChooseIngredients chooseIngredients;
 
     @GetMapping("/recipe-ingredients")
-    //public String chooseIngredientsForRecipe(Model model, Recipe recipe)
     public String chooseIngredientsForRecipe(Model model){
-        model.addAttribute("chooseIngredients", chooseIngredients);
-        List<Ingredient> ingredients = ingredientService.getAll();
-
-        model.addAttribute("ingredients", ingredients);
+      List<Ingredient> ingredients = ingredientService.getAll();
+       model.addAttribute("ingredients", ingredients);
 
         return "recipe-ingredients";
     }
@@ -57,9 +54,10 @@ public class RecipeController {
     }
 
     @GetMapping("/menu-test")
-    public String menu2(Model model, Recipe recipe) {
+    public String testMenu(Model model, Recipe recipe) {
         return "menu-test";
     }
+
 
 
 

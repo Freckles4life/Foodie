@@ -1,117 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Recipe Ingredients</title>
+    <title>Choose ingredients</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/css/recipeMenu.css">
+
+    <!--    Bootstrap js-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!--    jQuery js ?-->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script th:src="@{~/js/add-product-button.js}"></script>
+    <script type="text/javascript"></script>
+
+
 
 </head>
-
 <body>
-<div align="center">
-    <h1>Choose ingredients of your recipe</h1>
-    <form action="#" th:action="@{/recipes/recipe-ingredients}" th:object="${chooseIngredients}" method="post">
-        <label>Choose product:</label>
-        <div class="form-check form-switch" th:each="i : ${ingredients}">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:value="${i.Id}"
-                   th:field="*{chosenIngredients}">
-            <label class="form-check-label" for="flexSwitchCheckDefault" th:text="${i.ingredientName}"/>
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
-</div>
-</body>
-</html>
-
-
-<!--
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
--->
-
-<!--
-      <li><a class="dropdown-item" href="#">
-      <div class="form-check form-switch" th:each="i : ${ingredients}">
-      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:value="${i.Id}" th:field="*{chosenIngredients}">
-      <label class="form-check-label" for="flexSwitchCheckDefault" th:text="${i.ingredientName}"/>
-       </div>
-      </a></li>
--->
-
-<!--
-      <li><a class="dropdown-item" ></a>1</li>
-      <li><a class="dropdown-item" th:text="${i.ingredientName}"></a>2</li>
-      <li><a class="dropdown-item" th:text="${i.ingredientName}"></a>3</li>
--->
-
-
-<!--
-      <form action="#" th:action="@{/recipes/recipe-ingredients}" th:object="${chooseIngredients}" method="post">
-                <label>Ingredients:</label>
-                <div class="form-check form-switch" th:each="i : ${ingredients}">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:value="${i.Id}" th:field="*{chosenIngredients}">
-                    <label class="form-check-label" for="flexSwitchCheckDefault" th:text="${i.ingredientName}"/>
-                </div>
--->
-
-<!--
-<form action="#" method="post" th:action="@{/recipes/recipe-ingredients}" th:object="${chooseIngredients}">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-            Choose product
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" th:each="i : ${ingredients}">
-            <li><a class="dropdown-item" href="#">
-                <div class="form-check form-switch" th:each="i : ${ingredients}">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:value="${i.Id}"
-                           th:field="*{chosenIngredients}">
-                    <label class="form-check-label" for="flexSwitchCheckDefault" th:text="${i.ingredientName}"/>
-                </div>
-            </a></li>
-        </ul>
+<h1>Choose ingredients for your recipe</h1>
+<br>
+<form action="#" th:action="@{/recipe/recipe-ingredients}" th:object="${ingredientAmounts}" method="post"></form>
+<div class="row g-3">
+    <div class="col-sm-7">
+        <input type="text" class="form-control" placeholder="Product" aria-label="Product" name="ingredient"
+               list="ingredients" autocomplete="off"/>
+        <datalist id="ingredients">
+            <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
+        </datalist>
     </div>
--->
+    <div class="col-sm-2">
+        <input type="text" class="form-control" placeholder="Amount" aria-label="Amount">
+    </div>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" placeholder="Measure" aria-label="Measure" disabled>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-secondary" name="add" id="add" value="Add">Add product</button>
+    </div>
 
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-<div class="container">
-  <h2>Dropdowns</h2>
-  <p>The .divider class is used to separate links inside the dropdown menu with a thin horizontal line:</p>
-  <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
-      <li><a href="#">JavaScript</a></li>
-      <li class="divider"></li>
-      <li><a href="#">About Us</a></li>
-    </ul>
-  </div>
 </div>
 
+<br>
+<button type="submit" class="btn btn-primary">Next</button>
+
+
+</form>
 </body>
 </html>
--->
