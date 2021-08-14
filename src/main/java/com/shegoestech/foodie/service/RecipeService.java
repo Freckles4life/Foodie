@@ -3,6 +3,7 @@ package com.shegoestech.foodie.service;
 import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class RecipeService {
     public List<Recipe> getAll() {
         return recipeRepository.findAll();
     }
+
+    public Long getLastId(){
+        return recipeRepository.count();
+
+    }
+
 //
 //    public Recipe getById(Long id) {
 //        return recipeRepository.findById(id)
