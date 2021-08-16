@@ -15,8 +15,7 @@ import javax.validation.constraints.NotNull;
 public class IngredientAmounts {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

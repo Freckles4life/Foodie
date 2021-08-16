@@ -19,7 +19,8 @@
 
         <div class="ingredientList">
             <div class="form-check form-switch ingredient" th:each="i : ${ingredients}">
-                <input class="form-check-input" type="checkbox" th:id="'chooseIngredient_' + ${i.Id}" th:value="${i.Id}"
+                <input class="form-check-input" type="checkbox" checked th:id="'chooseIngredient_' + ${i.Id}"
+                       th:value="${i.Id}"
                        th:field="*{chosenIngredients}">
                 <label class="form-check-label" th:for="'chooseIngredient_' + ${i.Id}" th:text="${i.ingredientName}"/>
             </div>

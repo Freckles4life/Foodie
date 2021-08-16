@@ -42,6 +42,13 @@
                     <datalist id="ingredients">
                         <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
                     </datalist>
+                    <script>
+document.getElementById("ingredientInput").addEventListener("mouseleave", displayUnit);
+
+function displayUnit() {
+  document.getElementById("unitInput").value = "gr";
+}
+</script>
                 </td>
                 <td class="col-sm-2">
                     <input type="number" class="form-control" name="amount[]" placeholder="Amount" aria-label="Amount" required/>
@@ -63,9 +70,11 @@
         <label for="recipeInstructions" class="form-label">Recipe instructions</label>
         <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5" th:field="*{recipeInstruction}" required></textarea>
     </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 
 
 </form>
+
 </body>
 </html>
