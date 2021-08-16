@@ -4,6 +4,7 @@ import com.shegoestech.foodie.models.ChooseIngredients;
 import com.shegoestech.foodie.models.Ingredient;
 import com.shegoestech.foodie.models.IngredientAmounts;
 import com.shegoestech.foodie.models.Recipe;
+import com.shegoestech.foodie.service.IngredientAmountsService;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +28,24 @@ import java.util.stream.Collectors;
 public class RecipeController {
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
-    private final ChooseIngredients chooseIngredients;
+    private final IngredientAmountsService ingredientAmountsService;
 
     @GetMapping("/recipe-ingredients")
-    //public String chooseIngredientsForRecipe(Model model, Recipe recipe)
-    public String chooseIngredientsForRecipe(Model model){
-        model.addAttribute("chooseIngredients", chooseIngredients);
-        List<Ingredient> ingredients = ingredientService.getAll();
+    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
 
+        // to show all possible ingredients that you can choose from
+        List<Ingredient> ingredients = ingredientService.getAll();
         model.addAttribute("ingredients", ingredients);
+        model.addAttribute("ingredient", ingredient);
+        model.addAttribute("ingredientAmounts", ingredientAmounts);
 
         return "recipe-ingredients";
     }
 
     @PostMapping("/recipe-ingredients")
-    public String submitIngredients(Model model, Recipe recipes) {
+    public String submitIngredients(Model model) {
+        recipeService.getLastId();
+
         return "add-recipe";
     }
 
@@ -50,17 +54,6 @@ public class RecipeController {
         model.addAttribute("recipe", new Recipe());
         return "add-recipe";
     }
-
-    @GetMapping("/success")
-    public String success(Model model, Recipe recipe) {
-        return "success";
-    }
-
-    @GetMapping("/menu-test")
-    public String menu2(Model model, Recipe recipe) {
-        return "menu-test";
-    }
-
 
     @PostMapping("/add-recipe")
     public String saveRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
@@ -71,13 +64,21 @@ public class RecipeController {
         return "success";
     }
 
+    @GetMapping("/success")
+    public String success(Model model, Recipe recipe) {
+        return "success";
+    }
+
+
+
+
     @PostMapping("/success")
     public String saveRecipe2(@Valid Recipe recipe, BindingResult result, Model model) {
-         return "success";
+        return "success";
     }
 
     @GetMapping("/menu")
-    public ModelAndView showMenu(ChooseIngredients chooseIngredients){
+    public ModelAndView showMenu(ChooseIngredients chooseIngredients) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("menu");
 
@@ -95,11 +96,11 @@ public class RecipeController {
                 .collect(Collectors.toList());
 
         List<Recipe> lunch = filteredRecipes.stream()
-                .filter(r-> r.getType().equals("Lunch"))
+                .filter(r -> r.getType().equals("Lunch"))
                 .collect(Collectors.toList());
 
         List<Recipe> dinner = filteredRecipes.stream()
-                .filter(r-> r.getType().equals("Dinner"))
+                .filter(r -> r.getType().equals("Dinner"))
                 .collect(Collectors.toList());
 
 
@@ -109,9 +110,9 @@ public class RecipeController {
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
 
-        List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast,randomLunch, randomDinner));
+        List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
 
-        mv.addObject("recipes",recipeMenu);
+        mv.addObject("recipes", recipeMenu);
 
         return mv;
     }
@@ -119,12 +120,9 @@ public class RecipeController {
     private Recipe getRecipe(List<Recipe> recipes, Random rand) {
         Recipe randomRecipe;
 
-        if(recipes.size() > 0)
-        {
+        if (recipes.size() > 0) {
             randomRecipe = recipes.get(rand.nextInt(recipes.size()));
-        }
-        else
-        {
+        } else {
             randomRecipe =
                     new Recipe("No recipe found", new ArrayList<IngredientAmounts>());
         }
