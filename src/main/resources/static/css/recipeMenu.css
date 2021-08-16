@@ -1,0 +1,34 @@
+.menu{
+	display: flex;
+	justify-content: space-around;
+	align-content: space-around;
+}
+
+.menu-header{
+	margin: 15px;
+	color: #ffffff;
+}
+
+.list-group-item{
+	background-color: transparent;
+	font-style: italic;
+}
+
+.card-meal-type-header{
+	margin: 10px;
+}
+.card-img, .card-img-top {
+	height: 30vh;
+    object-fit: cover;
+}
+
+.card {
+    background-color: #C8E6C9;
+    border: 7px solid #4caf50;
+    color: #212121;
+}
+
+  
+body {
+	background-color: #388E3C;
+}

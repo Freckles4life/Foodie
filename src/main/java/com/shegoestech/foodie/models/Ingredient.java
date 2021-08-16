@@ -1,6 +1,8 @@
 package com.shegoestech.foodie.models;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,6 +20,7 @@ public class Ingredient /*implements Serializable*/ {
     private Long id;
 
     @NotBlank()
+    @Column(unique = true)
     private String ingredientName;
 
     @NotBlank()

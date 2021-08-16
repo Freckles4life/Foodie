@@ -1,29 +1,31 @@
 package com.shegoestech.foodie.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Table
 @Entity
 @Data
+@Builder
 public class IngredientAmounts {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "recipe_id")
-    @NotBlank
+    @NotNull
     private Recipe recipe;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    @NotBlank
+    @NotNull
     private Ingredient ingredient;
 
     @NotNull

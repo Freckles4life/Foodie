@@ -1,0 +1,55 @@
+.ingredientList{
+    width: 90vw;
+    height: 80vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.ingredient{
+    order: 10;
+    width: fit-content;
+}
+
+h1 {
+    color: #007A43;
+}
+
+body {
+    background-color: #c8e6c9;
+}
+
+button {
+    background-color: #007A43;
+    border: none;
+    color: white;
+    padding: 40px 50px;
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 60px;
+    max-width: 70%;
+}
+
+.form-check .form-check-input{
+    background-color: #C8E6C9;
+}
+
+.form-check-input:focus {
+    border-color: #388E3C;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #9ed0a5;
+}
+
+.form-check-input:checked {
+    border-color: #388E3C;
+    background-color: #4CAF50;
+}
+
+.form-switch .form-check-input:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23388E3C'/%3e%3c/svg%3e");
+}
