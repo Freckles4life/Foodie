@@ -1,9 +1,6 @@
 package com.shegoestech.foodie.controller;
 
-import com.shegoestech.foodie.models.ChooseIngredients;
-import com.shegoestech.foodie.models.Ingredient;
-import com.shegoestech.foodie.models.IngredientAmounts;
-import com.shegoestech.foodie.models.Recipe;
+import com.shegoestech.foodie.models.*;
 import com.shegoestech.foodie.service.IngredientAmountsService;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
@@ -51,16 +48,19 @@ public class RecipeController {
 
     @GetMapping("/add-recipe")
     public String addRecipeInstructions(Model model, Recipe recipe) {
-        model.addAttribute("recipe", new Recipe());
+        List<Ingredient> ingredients = ingredientService.getAll();
+        model.addAttribute("recipe", new RecipeCreationModel());
+        model.addAttribute("ingredients", ingredients);
         return "add-recipe";
     }
 
     @PostMapping("/add-recipe")
-    public String saveRecipe(@Valid Recipe recipe, BindingResult result, Model model) {
+    public String saveRecipe(@Valid RecipeCreationModel recipe, BindingResult result) {
         if (result.hasErrors()) {
             return "add-recipe";
         }
-        recipeService.register(recipe);
+
+       recipeService.register(recipe);
         return "success";
     }
 

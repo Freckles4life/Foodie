@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
-var html = '<tr><td class="col-sm-4"><input type="text" class="form-control" placeholder="Product" aria-label="Product" name="ingredient"list="ingredients" autocomplete="off"/><datalist id="ingredients"><option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option></datalist></td><td class="col-sm-2"><input type="text" class="form-control" placeholder="Amount" aria-label="Amount"></td><td class="col-sm-2"><input type="text" class="form-control" placeholder="Measure" aria-label="Measure" disabled></td><td class="col-sm-2"><button type="button" class="btn btn-danger" name="remove" id="remove" value="remove">Remove</button></td></tr>'
+var html = '<tr><td class="col-sm-4"><input type="text" class="form-control" placeholder="Product" aria-label="Product" name="ingredient[]" list="ingredients" autocomplete="off" required/>' +
+    '<datalist id="ingredients"><option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option></datalist></td>' +
+    '<td class="col-sm-2"><input type="number" class="form-control" placeholder="Amount" name="amount[]" aria-label="Amount" required></td><td class="col-sm-2">' +
+    '<input type="text" class="form-control" placeholder="Measure" aria-label="Measure" disabled></td>' +
+    '<td class="col-sm-2"><button type="button" class="btn btn-danger" name="remove" id="remove" value="remove">Remove</button></td></tr>'
 
     $("#add").click(function(){
         $("#input_field").append(html);

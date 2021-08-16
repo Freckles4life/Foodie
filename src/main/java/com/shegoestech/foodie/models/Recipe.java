@@ -1,12 +1,14 @@
 package com.shegoestech.foodie.models;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
+@Accessors(chain = true)
 @Table
 @Entity
 @Data
