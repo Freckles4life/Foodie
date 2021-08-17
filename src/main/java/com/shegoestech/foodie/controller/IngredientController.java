@@ -54,8 +54,18 @@ public class IngredientController {
         if (result.hasErrors()) {
             return "add-ingredient";
         }
+       String addIngredientName=ingredient.getIngredientName().toUpperCase();
+       List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
+                .stream()
+                .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
+                .collect(Collectors.toList());
+
+        if (ingredientsToCheckBeforeAdd.isEmpty()){
         ingredientService.register(ingredient);
         return "success";
+        }
+
+        return "add-ingredient";
     }
 
     @GetMapping("/success")
