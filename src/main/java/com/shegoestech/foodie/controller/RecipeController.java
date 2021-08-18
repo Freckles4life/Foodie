@@ -86,7 +86,7 @@ public class RecipeController {
 
         List<Recipe> filteredRecipes = recipes.stream()
                 .filter(r -> r.getIngredientAmounts()
-                        .stream().noneMatch(i ->
+                        .stream().allMatch(i ->
                                 chooseIngredients.getChosenIngredients()
                                         .contains(i.getIngredient().getId())))
                 .collect(Collectors.toList());

@@ -15,8 +15,7 @@ import java.util.Collection;
 public class Ingredient /*implements Serializable*/ {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank()
@@ -28,4 +27,6 @@ public class Ingredient /*implements Serializable*/ {
 
     @OneToMany(mappedBy = "ingredient")
     private Collection<IngredientAmounts> ingredientAmounts;
+
+    public Ingredient(){};
 }

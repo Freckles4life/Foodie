@@ -31,39 +31,53 @@ public class IngredientController {
     private final RecipeController recipeController;
 
     @GetMapping("/choose-ingredients")
-    public String showIngredients(Model model){
+    public String showIngredients(Model model) {
         model.addAttribute("chooseIngredients", chooseIngredients);
         List<Ingredient> ingredients = ingredientService.getAll();
-
         model.addAttribute("ingredients", ingredients);
-
         return "choose-ingredients";
     }
 
     @PostMapping("/choose-ingredients")
-    public ModelAndView  submitIngredients(@ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients) {
+    public ModelAndView submitIngredients(@ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients) {
         return recipeController.showMenu(chooseIngredients);
     }
 
-//    @PostMapping
-//    public String submitIngredients(@ModelAttribute("chosenIngredients") ChooseIngredients chooseIngredients){
-//
-//        return "menu";
-//    }
+    @GetMapping("/add-ingredient")
+    public String toAddIngredient(Model model, Ingredient ingredient) {
+        model.addAttribute("ingredient", ingredient);
+        return "add-ingredient";
+    }
 
-    //
-//    @GetMapping
-//    public String index(Model model) {
-//        return "index";
-//    }
-//
-//    @GetMapping("/ingredients-add")
-//    public String signUp(Model map, Ingredient ingredient) {
-//        map.addAttribute("pageName", "Add New ingredient");
-//
-//        return "ingredients-add";
-//    }
-//
+    @PostMapping("/add-ingredient")
+    public String ingredientAdd(@Valid Ingredient ingredient, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-ingredient";
+        }
+       String addIngredientName=ingredient.getIngredientName().toUpperCase();
+       List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
+                .stream()
+                .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
+                .collect(Collectors.toList());
+
+        if (ingredientsToCheckBeforeAdd.isEmpty()){
+        ingredientService.register(ingredient);
+        return "success";
+        }
+
+        return "add-ingredient";
+    }
+
+    @GetMapping("/success")
+    public String successAdd(Model model, Ingredient ingredient) {
+        return "success";
+    }
+
+    @PostMapping("/success")
+    public String saveIngredient(@Valid Ingredient ingredient, BindingResult result, Model model) {
+        return "success";
+    }
+
 //    @GetMapping("/delete/{id}")
 //    public String deleteById(@PathVariable("id") Long id, Model model) {
 //        ingredientService.deleteById(id);
@@ -91,17 +105,5 @@ public class IngredientController {
 //
 //        return index(model);
 //    }
-
-//    @PostMapping
-//    public String register(@Valid Ingredient ingredient, BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "ingredient-add";
-//        }
-//
-//        ingredientService.register(ingredient);
-//
-//        return index(model);
-//    }
-
 
 }
