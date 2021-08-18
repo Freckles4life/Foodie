@@ -15,6 +15,7 @@ var html = '<tr><td class="col-sm-4"><input type="text" class="form-control" pla
 
 
       $("#add").on('click', function(){
+      i++;
      $("#input_field").append(html);
         });
 
@@ -23,7 +24,7 @@ var html = '<tr><td class="col-sm-4"><input type="text" class="form-control" pla
           var x = document.getElementById("ingredientInput").value;
 //          document.getElementById("units").value = "gr";
           $('#units').attr('placeholder', x);
-$(this).fadeOut(500);
+
         })
 
 
