@@ -1,0 +1,43 @@
+ body {
+ background-image:url("https://cdn.pixabay.com/photo/2018/09/22/23/43/grapes-3696472_960_720.jpg");
+ }
+ h1 {
+            text-align: center;
+            color: #007A43;
+            font-family:"Lucida Handwriting";
+            margin:150px;
+            font-size:100px;
+            }
+
+            button1 {
+            background-color: #007A43;
+            border: none;
+  color: #D8DB1A;
+  padding: 40px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius:60px;
+  max-width: 40%;
+            }
+            button2 {
+            background-color: #007A43;
+            border: none;
+  color: white;
+  padding: 40px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  margin: 0 auto;
+  cursor: pointer;
+  border-radius:60px;
+  max-width: 40%;
+            }
+            a {
+            text-decoration: none;
+            color: white;
+            }
