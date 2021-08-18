@@ -11,6 +11,8 @@
   <div align="center">
       <h1 class="menu-header"> This is your today's menu!</h1>
 
+      <a th:href="@{/ingredients/export}">Download shopping list</a>
+
       <div class="menu">
           <div class="card" style="width: 30vw;" th:each="recipe, iStat : ${recipes}">
               <img src="/test.jpg" class="card-img-top" alt="...">

@@ -5,12 +5,16 @@ import com.shegoestech.foodie.repository.IngredientAmountsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class IngredientAmountsService {
     private final IngredientAmountsRepository ingredientAmountsRepository;
 
-    public IngredientAmounts register(IngredientAmounts ingredientAmounts){
-        return ingredientAmountsRepository.save(ingredientAmounts);
+
+    public List<IngredientAmounts> getAllRecipeIngredients(Long recipeId) {
+          return ingredientAmountsRepository.findAllByRecipeId(recipeId);
     }
+
 }

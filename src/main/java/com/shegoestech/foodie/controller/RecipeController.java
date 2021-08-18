@@ -27,24 +27,24 @@ public class RecipeController {
     private final IngredientService ingredientService;
     private final IngredientAmountsService ingredientAmountsService;
 
-    @GetMapping("/recipe-ingredients")
-    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
-
-        // to show all possible ingredients that you can choose from
-        List<Ingredient> ingredients = ingredientService.getAll();
-        model.addAttribute("ingredients", ingredients);
-        model.addAttribute("ingredient", ingredient);
-        model.addAttribute("ingredientAmounts", ingredientAmounts);
-
-        return "recipe-ingredients";
-    }
-
-    @PostMapping("/recipe-ingredients")
-    public String submitIngredients(Model model) {
-        recipeService.getLastId();
-
-        return "add-recipe";
-    }
+//    @GetMapping("/recipe-ingredients")
+//    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
+//
+//        // to show all possible ingredients that you can choose from
+//        List<Ingredient> ingredients = ingredientService.getAll();
+//        model.addAttribute("ingredients", ingredients);
+//        model.addAttribute("ingredient", ingredient);
+//        model.addAttribute("ingredientAmounts", ingredientAmounts);
+//
+//        return "recipe-ingredients";
+//    }
+//
+//    @PostMapping("/recipe-ingredients")
+//    public String submitIngredients(Model model) {
+//        recipeService.getLastId();
+//
+//        return "add-recipe";
+//    }
 
     @GetMapping("/add-recipe")
     public String addRecipeInstructions(Model model, Recipe recipe) {
@@ -111,6 +111,7 @@ public class RecipeController {
         Recipe randomDinner = getRecipe(dinner, rand);
 
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
+        recipeService.setFinalMenu(recipeMenu);
 
         mv.addObject("recipes", recipeMenu);
 
