@@ -47,9 +47,10 @@
             <tbody>
             <tr>
                 <td class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="Product" aria-label="Product" name="ingredient[]" required
-                           list="ingredients" autocomplete="off" id="ingredientInput"/>
-                    <datalist id="ingredients">
+                    <input type="text" class="form-control product" placeholder="Product" aria-label="Product"
+                           name="ingredient[]" required
+                           list="ingredients" autocomplete="off" id="ingredientInput1"/>
+                    <datalist id="ingredients"  >
                         <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
                     </datalist>
                 </td>
@@ -59,7 +60,7 @@
                 </td>
                 <td class="col-sm-2">
                     <input type="text" class="form-control measure" placeholder="Measure"
-                           aria-label="Measure" id="units"
+                           aria-label="Measure" id="units1"
                            disabled>
                 </td>
                 <td class="col-sm-2">
