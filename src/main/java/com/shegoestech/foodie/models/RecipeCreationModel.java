@@ -11,4 +11,5 @@ public class RecipeCreationModel {
     private String name;
     private String type;
     private String recipeInstruction;
+    private byte[] image;
 }

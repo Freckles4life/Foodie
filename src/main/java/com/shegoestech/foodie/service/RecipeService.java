@@ -32,7 +32,8 @@ public class RecipeService {
         var newRecipe = new Recipe()
                 .setRecipeName(recipe.getName())
                 .setType(recipe.getType())
-                .setRecipeInstructions(recipe.getRecipeInstruction());
+                .setRecipeInstructions(recipe.getRecipeInstruction())
+                .setImage(recipe.getImage());
 
         var savedRecipe = recipeRepository.save(newRecipe);
 

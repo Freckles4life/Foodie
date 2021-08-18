@@ -9,11 +9,17 @@
 </head>
 <body class="container">
 <h1>Add instructions of your recipe!</h1>
-<form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}">
+<form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="name" class="form-label">Recipe name</label>
         <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name" aria-describedby="emailHelp" required>
     </div>
+
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Please, upload recipe picture</label>
+        <input class="form-control" th:type="file" id="formFile" th:name="imageFile">
+    </div>
+
     <div class="form-check">
         <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}" th:value="Breakfast" >
         <label class="form-check-label" for="flexRadioDefault1">

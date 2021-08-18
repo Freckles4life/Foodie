@@ -5,7 +5,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Accessors(chain = true)
@@ -16,7 +15,6 @@ public class Recipe {
 
     public Recipe()
     {
-
     }
 
     public Recipe(String recipeName, Collection<IngredientAmounts> ingredientAmounts) {
@@ -37,6 +35,10 @@ public class Recipe {
     @Column(columnDefinition = "TEXT")
     @NotBlank(message = "Recipe instructions is required")
     private String recipeInstructions;
+
+    @Lob
+    @Column(name = "image", nullable = false)
+    private byte[] image;
 
     @OneToMany(mappedBy = "recipe")
     private Collection<IngredientAmounts> ingredientAmounts;

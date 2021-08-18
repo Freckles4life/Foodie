@@ -9,13 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -47,7 +46,7 @@ public class RecipeController {
 //    }
 
     @GetMapping("/add-recipe")
-    public String addRecipeInstructions(Model model, Recipe recipe) {
+    public String addRecipeInstructions( Recipe recipe, Model model) {
         List<Ingredient> ingredients = ingredientService.getAll();
         model.addAttribute("recipe", new RecipeCreationModel());
         model.addAttribute("ingredients", ingredients);
@@ -55,12 +54,12 @@ public class RecipeController {
     }
 
     @PostMapping("/add-recipe")
-    public String saveRecipe(@Valid RecipeCreationModel recipe, BindingResult result) {
+    public String saveRecipe(@Valid RecipeCreationModel recipe, @RequestParam("imageFile") MultipartFile imageFile, BindingResult result) throws IOException {
         if (result.hasErrors()) {
             return "add-recipe";
         }
-
-       recipeService.register(recipe);
+        recipe.setImage(imageFile.getBytes());
+        recipeService.register(recipe);
         return "success";
     }
 
@@ -106,9 +105,14 @@ public class RecipeController {
 
         Random rand = new Random();
 
+
         Recipe randomBreakfast = getRecipe(breakfast, rand);
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
+
+        mv.addObject("breakfastImage", Base64.getEncoder().encodeToString(randomBreakfast.getImage()));
+        mv.addObject("lunchImage", Base64.getEncoder().encodeToString(randomLunch.getImage()));
+        mv.addObject("dinnerImage", Base64.getEncoder().encodeToString(randomDinner.getImage()));
 
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
         recipeService.setFinalMenu(recipeMenu);

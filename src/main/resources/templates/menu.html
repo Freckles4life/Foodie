@@ -15,7 +15,12 @@
 
       <div class="menu">
           <div class="card" style="width: 30vw;" th:each="recipe, iStat : ${recipes}">
-              <img src="/test.jpg" class="card-img-top" alt="...">
+              <div th:switch="${recipe.type}">
+                  <img class="card-img" th:case="Breakfast" th:src="${breakfastImage} == null ? _ : @{'data:image/png;base64,'+${breakfastImage}}"/>
+                  <img class="card-img" th:case="Lunch" th:src="${lunchImage} == null ? _ : @{'data:image/png;base64,'+${lunchImage}}"/>
+                  <img class="card-img" th:case="Dinner" th:src="${dinnerImage} == null ? _ : @{'data:image/png;base64,'+${dinnerImage}}"/>
+              </div>
+
               <div  th:switch="${iStat.index}">
                   <h3 class="card-meal-type-header" th:case="0">Breakfast</h3>
                   <h3 class="card-meal-type-header" th:case="1" >Lunch</h3>
