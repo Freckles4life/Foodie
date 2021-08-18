@@ -27,24 +27,24 @@ public class RecipeController {
     private final IngredientService ingredientService;
     private final IngredientAmountsService ingredientAmountsService;
 
-    @GetMapping("/recipe-ingredients")
-    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
-
-        // to show all possible ingredients that you can choose from
-        List<Ingredient> ingredients = ingredientService.getAll();
-        model.addAttribute("ingredients", ingredients);
-        model.addAttribute("ingredient", ingredient);
-        model.addAttribute("ingredientAmounts", ingredientAmounts);
-
-        return "recipe-ingredients";
-    }
-
-    @PostMapping("/recipe-ingredients")
-    public String submitIngredients(Model model) {
-        recipeService.getLastId();
-
-        return "add-recipe";
-    }
+//    @GetMapping("/recipe-ingredients")
+//    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
+//
+//        // to show all possible ingredients that you can choose from
+//        List<Ingredient> ingredients = ingredientService.getAll();
+//        model.addAttribute("ingredients", ingredients);
+//        model.addAttribute("ingredient", ingredient);
+//        model.addAttribute("ingredientAmounts", ingredientAmounts);
+//
+//        return "recipe-ingredients";
+//    }
+//
+//    @PostMapping("/recipe-ingredients")
+//    public String submitIngredients(Model model) {
+//        recipeService.getLastId();
+//
+//        return "add-recipe";
+//    }
 
     @GetMapping("/add-recipe")
     public String addRecipeInstructions(Model model, Recipe recipe) {
@@ -111,6 +111,7 @@ public class RecipeController {
         Recipe randomDinner = getRecipe(dinner, rand);
 
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
+        recipeService.setFinalMenu(recipeMenu);
 
         mv.addObject("recipes", recipeMenu);
 
@@ -129,4 +130,38 @@ public class RecipeController {
         return randomRecipe;
     }
 
+
+    @GetMapping("/add-ingredient")
+    public String toAddIngredient(Model model, Ingredient ingredient) {
+        model.addAttribute("ingredient", ingredient);
+        return "add-ingredient";
+    }
+
+    @PostMapping("/add-ingredient")
+    public String ingredientAdd(@Valid Ingredient ingredient, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-ingredient";
+        }
+        String addIngredientName=ingredient.getIngredientName().toUpperCase();
+        List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
+                .stream()
+                .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
+                .collect(Collectors.toList());
+
+        if (ingredientsToCheckBeforeAdd.isEmpty()){
+            ingredientService.register(ingredient);
+            return "ingredient-success";
+        }
+
+        return "add-ingredient";
+    }
+
+    @GetMapping("/ingredient-success")
+    public String successAdd(Model model, Ingredient ingredient) {
+        return "ingredient-success";
+    }
+    @PostMapping("/ingredient-success")
+    public String saveIngredient(@Valid Ingredient ingredient, BindingResult result, Model model) {
+        return "ingredient-success";
+    }
 }

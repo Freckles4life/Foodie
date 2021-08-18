@@ -1,13 +1,9 @@
-//document.getElementById("ingredientInput").addEventListener("mouseleave", displayUnit);
-//
-//function displayUnit() {
-//  document.getElementById("unitInput").value = "gr";
+//    function changeText() {
+//  var x = document.getElementById("ingredientInput").value;
+//  document.getElementById("units").value = x;
 //}
 
-//<script>
-//document.getElementById("ingredientInput").addEventListener("mouseleave", displayUnit);
-//
-//function displayUnit() {
-//  document.getElementById("unitInput").value = "gr";
+//function changeText2(){
+//var text = document.createTextNode(ingredients[5].ingredientMeasure);
+// document.getElementById("units").value = text;
 //}
-//</script>

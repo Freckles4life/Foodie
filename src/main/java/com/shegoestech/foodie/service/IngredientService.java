@@ -1,6 +1,8 @@
 package com.shegoestech.foodie.service;
 
 import com.shegoestech.foodie.models.Ingredient;
+import com.shegoestech.foodie.models.IngredientAmounts;
+import com.shegoestech.foodie.repository.IngredientAmountsRepository;
 import com.shegoestech.foodie.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -22,24 +24,9 @@ public class IngredientService {
                 .orElseThrow(() -> new RuntimeException("Ingredient not found"));
     }
 
-    //šo iespējams nevajadzēs
-    public Ingredient update(Long id, Ingredient ingredient) {
-        Ingredient existingIngredient = ingredientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
-
-        existingIngredient.setIngredientName(ingredient.getIngredientName());
-
-        return ingredientRepository.save(existingIngredient);
-    }
 
     public List<Ingredient> getAll() {
         return ingredientRepository.findAll(Sort.by(Sort.Direction.ASC, "ingredientName"));
     }
-
-    //šo iespējams nevajadzēs
-    public void deleteById(Long id) {
-        ingredientRepository.deleteById(id);
-    }
-
 
 }

@@ -6,7 +6,9 @@ import com.shegoestech.foodie.models.RecipeCreationModel;
 import com.shegoestech.foodie.repository.IngredientAmountsRepository;
 import com.shegoestech.foodie.repository.IngredientRepository;
 import com.shegoestech.foodie.repository.RecipeRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +22,10 @@ public class RecipeService {
     private final IngredientRepository ingredientRepository;
     private final IngredientAmountsRepository ingredientAmountsRepository;
 
-    public Recipe register(Recipe recipe) {
-        return recipeRepository.save(recipe);
-    }
+
+    @Getter
+    @Setter
+    public List<Recipe> finalMenu = new ArrayList<>();
 
     @Transactional
     public Recipe register(RecipeCreationModel recipe) {
@@ -60,31 +63,17 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public Long getLastId() {
-        return recipeRepository.count();
-
-    }
-
-//
-//    public Recipe getById(Long id) {
-//        return recipeRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Recipe not found"));
-//    }
-//
-//    //šo iespējams nevajadzēs
-//    public Recipe update(Long id, Recipe recipe) {
-//        Recipe existingRecipe = recipeRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Recipe not found"));
-//
-//        existingRecipe.setRecipeName(recipe.getRecipeName());
-//        existingRecipe.setType(recipe.getType());
-//        existingRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
-//
-//        return recipeRepository.save(existingRecipe);
-//    }
 
 
-    //šo iespējams nevajadzēs
+
+
+
+
+
+
+
+
+        //šo iespējams nevajadzēs
 //    public void deleteById(Long id) {
 //        recipeRepository.deleteById(id);
 //    }
