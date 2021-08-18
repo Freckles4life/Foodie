@@ -1,21 +1,18 @@
 package com.shegoestech.foodie.service;
 
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.pdf.*;
-import com.shegoestech.foodie.controller.RecipeController;
-import com.shegoestech.foodie.models.Ingredient;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 import com.shegoestech.foodie.models.IngredientAmounts;
 import com.shegoestech.foodie.models.Recipe;
-import com.shegoestech.foodie.repository.IngredientAmountsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +21,7 @@ import java.util.List;
 public class ShoppingListExporter {
 
     private final List<Recipe> menu;
-    
+
 
     private void writeTableHeader(PdfPTable table) {
 
@@ -45,9 +42,11 @@ public class ShoppingListExporter {
     public void writeTableData(PdfPTable table) {
 
         for (Recipe recipe : menu) {
-            table.addCell(String.valueOf(recipe.getIngredientAmounts()));
-            table.addCell(String.valueOf(recipe.getType()));
-            table.addCell(String.valueOf(recipe.getRecipeInstructions()));
+            for (IngredientAmounts ing : recipe.getIngredientAmounts()) {
+                table.addCell(String.valueOf(ing.getIngredient().getIngredientName()));
+                table.addCell(String.valueOf(ing.getAmount()));
+                table.addCell(String.valueOf(ing.getIngredient().getIngredientMeasure()));
+            }
         }
     }
 
