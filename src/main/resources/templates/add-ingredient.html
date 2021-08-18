@@ -10,7 +10,7 @@
 </head>
 <body class="container">
 <h1>Add ingredient!</h1>
-<form th:object="${ingredient}" method="post" th:action="@{/ingredients/add-ingredient}">
+<form th:object="${ingredient}" method="post" th:action="@{/recipes/add-ingredient}">
     <div class="mb-3">
         <label for="name" class="form-label">Ingredient name</label>
         <input type="text" class="form-control" name="ingredientName" th:field="*{ingredientName}" id="name" aria-describedby="emailHelp" required>
