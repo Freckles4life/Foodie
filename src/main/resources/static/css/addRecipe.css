@@ -1,0 +1,16 @@
+body {
+    background-color: #c8e6c9;
+    }
+    h1 {
+    color: #007a43;
+    text-align: center;
+    }
+
+    .form-check-input {
+    background-color: #fff;
+    border-color: #388E3C;
+}
+.form-check-input:checked {
+    border-color: #388E3C;
+    background-color: #4CAF50;
+    }

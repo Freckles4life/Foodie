@@ -53,40 +53,6 @@ public class IngredientController {
         return recipeController.showMenu(chooseIngredients);
     }
 
-    @GetMapping("/add-ingredient")
-    public String toAddIngredient(Model model, Ingredient ingredient) {
-        model.addAttribute("ingredient", ingredient);
-        return "add-ingredient";
-    }
-
-//    @PostMapping("/add-ingredient")
-//    public String ingredientAdd(@Valid Ingredient ingredient, BindingResult result, Model model) {
-//        if (result.hasErrors()) {
-//            return "add-ingredient";
-//        }
-//       String addIngredientName=ingredient.getIngredientName().toUpperCase();
-//       List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
-//                .stream()
-//                .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
-//                .collect(Collectors.toList());
-//
-//        if (ingredientsToCheckBeforeAdd.isEmpty()){
-//        ingredientService.register(ingredient);
-//        return "success";
-//        }
-//
-//        return "add-ingredient";
-//    }
-
-    @GetMapping("/success")
-    public String successAdd(Model model, Ingredient ingredient) {
-        return "success";
-    }
-
-    @PostMapping("/success")
-    public String saveIngredient(@Valid Ingredient ingredient, BindingResult result, Model model) {
-        return "success";
-    }
 
 //    @GetMapping("/delete/{id}")
 //    public String deleteById(@PathVariable("id") Long id, Model model) {

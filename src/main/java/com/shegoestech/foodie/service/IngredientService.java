@@ -15,8 +15,9 @@ import java.util.List;
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
 
-
-
+    public Ingredient register(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
 
     public Ingredient getById(Long id) {
         return ingredientRepository.findById(id)
