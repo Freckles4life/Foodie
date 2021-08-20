@@ -77,8 +77,6 @@ public class RecipeController {
     }
 
 
-
-
     @PostMapping("/success")
     public String saveRecipe2(@Valid Recipe recipe, BindingResult result, Model model) {
         return "success";
@@ -118,9 +116,17 @@ public class RecipeController {
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
 
-        mv.addObject("breakfastImage", Base64.getEncoder().encodeToString(randomBreakfast.getImage()));
-        mv.addObject("lunchImage", Base64.getEncoder().encodeToString(randomLunch.getImage()));
-        mv.addObject("dinnerImage", Base64.getEncoder().encodeToString(randomDinner.getImage()));
+        if (randomBreakfast.getImage() != null) {
+            mv.addObject("breakfastImage", Base64.getEncoder().encodeToString(randomBreakfast.getImage()));
+        }
+        if (randomLunch.getImage() != null) {
+            mv.addObject("lunchImage", Base64.getEncoder().encodeToString(randomLunch.getImage()));
+        }
+
+        if (randomDinner.getImage() != null) {
+            mv.addObject("dinnerImage", Base64.getEncoder().encodeToString(randomDinner.getImage()));
+        }
+
 
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
         recipeService.setFinalMenu(recipeMenu);
@@ -154,13 +160,13 @@ public class RecipeController {
         if (result.hasErrors()) {
             return "add-ingredient";
         }
-        String addIngredientName=ingredient.getIngredientName().toUpperCase();
+        String addIngredientName = ingredient.getIngredientName().toUpperCase();
         List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
                 .stream()
                 .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
                 .collect(Collectors.toList());
 
-        if (ingredientsToCheckBeforeAdd.isEmpty()){
+        if (ingredientsToCheckBeforeAdd.isEmpty()) {
             ingredientService.register(ingredient);
             return "ingredient-success";
         }
@@ -172,6 +178,7 @@ public class RecipeController {
     public String successAdd(Model model, Ingredient ingredient) {
         return "ingredient-success";
     }
+
     @PostMapping("/ingredient-success")
     public String saveIngredient(@Valid Ingredient ingredient, BindingResult result, Model model) {
         return "ingredient-success";
