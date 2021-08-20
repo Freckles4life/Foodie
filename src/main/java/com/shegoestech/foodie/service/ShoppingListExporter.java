@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +29,8 @@ public class ShoppingListExporter {
     private void writeTableHeader(PdfPTable table) {
 
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.GRAY);
-        cell.setPadding(5);
+        cell.setBackgroundColor(Color.gray);
+        cell.setPadding(10);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
@@ -40,12 +43,25 @@ public class ShoppingListExporter {
     }
 
     public void writeTableData(PdfPTable table) {
+        Map<String, Long> products = new HashMap<>();
+        List<String> productList = new ArrayList<>();
 
         for (Recipe recipe : menu) {
             for (IngredientAmounts ing : recipe.getIngredientAmounts()) {
-                table.addCell(String.valueOf(ing.getIngredient().getIngredientName()));
-                table.addCell(String.valueOf(ing.getAmount()));
-                table.addCell(String.valueOf(ing.getIngredient().getIngredientMeasure()));
+                String name = ing.getIngredient().getIngredientName();
+                long amount = ing.getAmount();
+                productList.add(name);
+
+                if (products.containsKey(name)) {
+                    amount += products.get(name);
+                    table.deleteRow(productList.indexOf(name) + 1);
+                    productList.remove(name);
+                }
+                products.put(name, amount);
+                table.addCell(name);
+                table.addCell(String.valueOf(amount));
+                String measure = ing.getIngredient().getIngredientMeasure();
+                table.addCell(measure);
             }
         }
     }
@@ -54,17 +70,17 @@ public class ShoppingListExporter {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
-        Paragraph title = new Paragraph("Your shopping list for today");
+        Paragraph title = new Paragraph("Grab a wallet and head to the shop to get these yummy products");
         title.setAlignment(Paragraph.ALIGN_CENTER);
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.gray);
-        font.setSize(18);
+        font.setSize(30);
 
         document.add(title);
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
-        table.setWidths(new float[]{4.0f, 3.0f, 2.0f});
+        table.setWidths(new float[]{3.0f, 3.0f, 3.0f});
 
         writeTableHeader(table);
         writeTableData(table);

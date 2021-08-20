@@ -39,26 +39,6 @@ $(document).ready(function () {
         preview.setAttribute("onchange", "fillMeasure('" + id + "','" + unitId + "')");
     })
 
-
-// code for insering ml, gr, pieces in fields
-
-    // $('tbody').on('change', '#ingredientInput1', function () {
-    //     // x should be changed to respective unit for the product
-    //     var x = document.getElementById("ingredientInput1").value;
-    //     $('#units1').val(map[x]);
-    // })
-    //
-    // $('tbody').on('change', '#ingredientInput2', function () {
-    //     var x = document.getElementById("ingredientInput2").value;
-    //     $('#units2').val(map[x]);
-    // })
-    //
-    // $('tbody').on('change', '#ingredientInput3', function () {
-    //     var x = document.getElementById("ingredientInput3").value;
-    //     $('#units3').val(map[x]);
-    // })
-
-
 });
 
 

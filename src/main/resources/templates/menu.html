@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://kit.fontawesome.com/9259fad7ec.js" crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <title>Choose ingredients</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/9259fad7ec.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/recipeMenu.css">
 </head>
 <body>
   <div align="center">
       <h1 class="menu-header"> This is your today's menu!</h1>
-
+      <i class="fas fa-shopping-basket"></i>
       <a th:href="@{/ingredients/export}">Download shopping list</a>
+      <br>
+      <br>
 
       <div class="menu">
           <div class="card" style="width: 30vw;" th:each="recipe, iStat : ${recipes}">

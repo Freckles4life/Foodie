@@ -19,17 +19,19 @@
 <h1>Add instructions of your recipe!</h1>
 <form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
     <div class="mb-3">
-        <label for="name" class="form-label">Recipe name</label>
+        <b>Type name</b></label>
         <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name"
                aria-describedby="emailHelp" required>
     </div>
-
+<br>
     <div class="mb-3">
-        <label for="formFile" class="form-label">Please, upload recipe picture</label>
+        <label for="formFile" class="form-label"><b>Add picture</b></label>
         <input class="form-control" th:type="file" id="formFile" th:name="imageFile">
     </div>
-
+    <br>
+    <label class="form-label"><b>Choose type</b></label>
     <div class="form-check">
+
         <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}"
                th:value="Breakfast">
         <label class="form-check-label" for="flexRadioDefault1">
@@ -44,6 +46,7 @@
         </label>
     </div>
     <div class="form-check">
+
         <input class="form-check-input" type="radio" name="type" id="flexRadioDefault3" required th:field="*{type}"
                th:value="Dinner">
         <label class="form-check-label" for="flexRadioDefault3">
@@ -51,8 +54,8 @@
         </label>
     </div>
     <div class="mb-3">
-        <br/>
-        <label class="form-label">Add Product(s)</label>
+        <br>
+        <label class="form-label"><b>Add Product(s)</b></label>
         <table class="row g-3" id="input_field">
             <tbody>
             <tr>
@@ -79,13 +82,14 @@
             </tr>
             </tbody>
         </table>
-        <br>
+      <p>Can't find what you need? <a href="/recipes/add-ingredient">Click here to add new product to the system</a></p>
         <div>
             <button type="button" class="btn btn-success" name="add" id="add" value="Add">Add product</button>
         </div>
     </div>
+    <br>
     <div class="mb-3">
-        <label for="recipeInstructions" class="form-label">Recipe instructions</label>
+        <label for="recipeInstructions" class="form-label"><b>Tell us instructions</b></label>
         <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5"
                   th:field="*{recipeInstruction}" required></textarea>
     </div>
