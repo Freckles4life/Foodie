@@ -47,12 +47,12 @@ public class RecipeController {
         }
         recipe.setImage(imageFile.getBytes());
         recipeService.register(recipe);
-        return "success";
+        return "recipe-success";
     }
 
-    @GetMapping("/success")
+    @GetMapping("/recipe-success")
     public String success(Model model, Recipe recipe) {
-        return "success";
+        return "recipe-success";
     }
 
 
