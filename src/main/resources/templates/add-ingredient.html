@@ -10,7 +10,7 @@
 </head>
 <body class="container">
 <h1>Add product</h1>
-<form th:object="${ingredient}" method="post" th:action="@{/recipes/add-ingredient}">
+<form th:object="${ingredient}" method="post" th:action="@{/ingredients/add-ingredient}">
     <div class="mb-3">
         <label for="name" class="form-label"><b>Type name</b></label>
         <input type="text" class="form-control" name="ingredientName" th:field="*{ingredientName}" id="name"

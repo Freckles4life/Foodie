@@ -10,15 +10,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -63,4 +66,37 @@ public class IngredientController {
         exporter.export(response);
 
     }
+
+    @GetMapping("/add-ingredient")
+    public String toAddIngredient(Model model, Ingredient ingredient) {
+        model.addAttribute("ingredient", ingredient);
+        return "add-ingredient";
+    }
+
+    @PostMapping("/add-ingredient")
+    public String ingredientAdd(@Valid Ingredient ingredient, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add-ingredient";
+        }
+
+        String addIngredientName = ingredient.getIngredientName().toUpperCase();
+        List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
+                .stream()
+                .filter(r -> r.getIngredientName().toUpperCase().equals(addIngredientName))
+                .collect(Collectors.toList());
+
+        if (ingredientsToCheckBeforeAdd.isEmpty()) {
+            ingredientService.register(ingredient);
+            return "ingredient-success";
+        }
+
+        model.addAttribute("existingIngredientError", "Ingredient with name '" + ingredient.getIngredientName() + "' exists");
+        return "add-ingredient";
+    }
+
+    @GetMapping("/ingredient-success")
+    public String successAdd(Model model, Ingredient ingredient) {
+        return "ingredient-success";
+    }
+
 }
