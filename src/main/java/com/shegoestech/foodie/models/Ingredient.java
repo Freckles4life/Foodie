@@ -1,12 +1,10 @@
 package com.shegoestech.foodie.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Table
@@ -25,6 +23,7 @@ public class Ingredient /*implements Serializable*/ {
     @NotBlank()
     private String ingredientMeasure;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ingredient")
     private Collection<IngredientAmounts> ingredientAmounts;
 

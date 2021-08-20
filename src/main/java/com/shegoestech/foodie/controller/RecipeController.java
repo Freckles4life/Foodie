@@ -1,5 +1,7 @@
 package com.shegoestech.foodie.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shegoestech.foodie.models.*;
 import com.shegoestech.foodie.service.IngredientAmountsService;
 import com.shegoestech.foodie.service.IngredientService;
@@ -8,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,10 +51,13 @@ public class RecipeController {
 //    }
 
     @GetMapping("/add-recipe")
-    public String addRecipeInstructions( Recipe recipe, Model model) {
+    public String addRecipeInstructions(Recipe recipe, Model model) throws JsonProcessingException {
         List<Ingredient> ingredients = ingredientService.getAll();
         model.addAttribute("recipe", new RecipeCreationModel());
+        var json = new ObjectMapper().writeValueAsString(ingredients);
         model.addAttribute("ingredients", ingredients);
+        model.addAttribute("ingredientsJson", json);
+
         return "add-recipe";
     }
 

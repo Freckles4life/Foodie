@@ -1,9 +1,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/addRecipe.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script th:inline="javascript">
+        let ingredients = JSON.parse([[${ingredientsJson}]]);
+    </script>
     <script th:src="@{~/js/add-product-button.js}"></script>
     <script th:src="@{~/js/set-units.js}"></script>
 
@@ -14,7 +20,8 @@
 <form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="name" class="form-label">Recipe name</label>
-        <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name" aria-describedby="emailHelp" required>
+        <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name"
+               aria-describedby="emailHelp" required>
     </div>
 
     <div class="mb-3">
@@ -23,19 +30,22 @@
     </div>
 
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}" th:value="Breakfast" >
+        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}"
+               th:value="Breakfast">
         <label class="form-check-label" for="flexRadioDefault1">
             Breakfast
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" required th:field="*{type}" th:value="Lunch">
+        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" required th:field="*{type}"
+               th:value="Lunch">
         <label class="form-check-label" for="flexRadioDefault2">
             Lunch
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault3" required th:field="*{type}" th:value="Dinner" >
+        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault3" required th:field="*{type}"
+               th:value="Dinner">
         <label class="form-check-label" for="flexRadioDefault3">
             Dinner
         </label>
@@ -49,8 +59,9 @@
                 <td class="col-sm-4">
                     <input type="text" class="form-control product" placeholder="Product" aria-label="Product"
                            name="ingredient[]" required
-                           list="ingredients" autocomplete="off" id="ingredientInput1"/>
-                    <datalist id="ingredients"  >
+                           list="ingredients" autocomplete="off" id="ingredientInput1"
+                           onchange="fillMeasure('ingredientInput1','units1')"/>
+                    <datalist id="ingredients">
                         <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
                     </datalist>
                 </td>
@@ -75,7 +86,8 @@
     </div>
     <div class="mb-3">
         <label for="recipeInstructions" class="form-label">Recipe instructions</label>
-        <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5" th:field="*{recipeInstruction}" required></textarea>
+        <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5"
+                  th:field="*{recipeInstruction}" required></textarea>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
