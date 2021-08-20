@@ -3,7 +3,6 @@ package com.shegoestech.foodie.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shegoestech.foodie.models.*;
-import com.shegoestech.foodie.service.IngredientAmountsService;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -135,6 +134,7 @@ public class RecipeController {
         if (result.hasErrors()) {
             return "add-ingredient";
         }
+
         String addIngredientName = ingredient.getIngredientName().toUpperCase();
         List<Ingredient> ingredientsToCheckBeforeAdd = ingredientService.getAll()
                 .stream()
@@ -146,6 +146,7 @@ public class RecipeController {
             return "ingredient-success";
         }
 
+        model.addAttribute("existingIngredientError", "Ingredient with name '" + ingredient.getIngredientName() + "' exists");
         return "add-ingredient";
     }
 

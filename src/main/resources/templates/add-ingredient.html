@@ -13,9 +13,11 @@
 <form th:object="${ingredient}" method="post" th:action="@{/recipes/add-ingredient}">
     <div class="mb-3">
         <label for="name" class="form-label"><b>Type name</b></label>
-        <input type="text" class="form-control" name="ingredientName" th:field="*{ingredientName}" id="name" aria-describedby="emailHelp" required>
-        <span th:if="${#fields.hasErrors('ingredientName')}" th:errors="*{ingredientName}" class="text-danger">???
-        </span>
+        <input type="text" class="form-control" name="ingredientName" th:field="*{ingredientName}" id="name"
+               aria-describedby="emailHelp" required>
+        <span th:if="${#fields.hasErrors('ingredientName')}" th:errors="*{ingredientName}" class="text-danger"></span>
+        <span th:if="${existingIngredientError != null && existingIngredientError!= ''}"
+              th:text="${existingIngredientError}" class="text-danger"></span>
     </div>
 <br>
     <label class="form-label"><b>Choose unit</b></label>
