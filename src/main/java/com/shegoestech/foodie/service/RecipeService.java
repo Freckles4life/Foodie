@@ -22,7 +22,6 @@ public class RecipeService {
     private final IngredientRepository ingredientRepository;
     private final IngredientAmountsRepository ingredientAmountsRepository;
 
-
     @Getter
     @Setter
     public List<Recipe> finalMenu = new ArrayList<>();

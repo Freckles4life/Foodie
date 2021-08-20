@@ -29,26 +29,7 @@ import java.util.stream.Collectors;
 public class RecipeController {
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
-    private final IngredientAmountsService ingredientAmountsService;
 
-//    @GetMapping("/recipe-ingredients")
-//    public String chooseIngredientsForRecipe(Model model, Ingredient ingredient, IngredientAmounts ingredientAmounts) {
-//
-//        // to show all possible ingredients that you can choose from
-//        List<Ingredient> ingredients = ingredientService.getAll();
-//        model.addAttribute("ingredients", ingredients);
-//        model.addAttribute("ingredient", ingredient);
-//        model.addAttribute("ingredientAmounts", ingredientAmounts);
-//
-//        return "recipe-ingredients";
-//    }
-//
-//    @PostMapping("/recipe-ingredients")
-//    public String submitIngredients(Model model) {
-//        recipeService.getLastId();
-//
-//        return "add-recipe";
-//    }
 
     @GetMapping("/add-recipe")
     public String addRecipeInstructions(Recipe recipe, Model model) throws JsonProcessingException {
@@ -57,7 +38,6 @@ public class RecipeController {
         var json = new ObjectMapper().writeValueAsString(ingredients);
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("ingredientsJson", json);
-
         return "add-recipe";
     }
 
@@ -76,11 +56,6 @@ public class RecipeController {
         return "success";
     }
 
-
-    @PostMapping("/success")
-    public String saveRecipe2(@Valid Recipe recipe, BindingResult result, Model model) {
-        return "success";
-    }
 
     @GetMapping("/menu")
     public ModelAndView showMenu(ChooseIngredients chooseIngredients) {
@@ -179,8 +154,4 @@ public class RecipeController {
         return "ingredient-success";
     }
 
-    @PostMapping("/ingredient-success")
-    public String saveIngredient(@Valid Ingredient ingredient, BindingResult result, Model model) {
-        return "ingredient-success";
-    }
 }

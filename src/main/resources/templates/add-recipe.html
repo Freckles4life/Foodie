@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script th:inline="javascript">
         let ingredients = JSON.parse([[${ingredientsJson}]]);
+
     </script>
     <script th:src="@{~/js/add-product-button.js}"></script>
     <script th:src="@{~/js/set-units.js}"></script>
@@ -16,19 +17,14 @@
 </head>
 <body class="container">
 <br>
-<h1>Add instructions of your recipe!</h1>
+<h1>Add instructions of your recipe</h1>
 <form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
     <div class="mb-3">
-        <b>Type name</b></label>
+        <b>Type recipe name</b></label>
         <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name"
                aria-describedby="emailHelp" required>
     </div>
-<br>
-    <div class="mb-3">
-        <label for="formFile" class="form-label"><b>Add picture</b></label>
-        <input class="form-control" th:type="file" id="formFile" th:name="imageFile">
-    </div>
-    <br>
+
     <label class="form-label"><b>Choose type</b></label>
     <div class="form-check">
 
@@ -82,11 +78,18 @@
             </tr>
             </tbody>
         </table>
-      <p>Can't find what you need? <a href="/recipes/add-ingredient">Click here to add new product to the system</a></p>
+        <p>Can't find what you need?
+            <a href="/recipes/add-ingredient">Click here to add new product to the system</a></p>
         <div>
             <button type="button" class="btn btn-success" name="add" id="add" value="Add">Add product</button>
         </div>
     </div>
+    <br>
+    <div class="mb-3">
+        <label for="formFile" class="form-label"><b>Add picture</b></label>
+        <input class="form-control" th:type="file" id="formFile" th:name="imageFile" required>
+    </div>
+
     <br>
     <div class="mb-3">
         <label for="recipeInstructions" class="form-label"><b>Tell us instructions</b></label>

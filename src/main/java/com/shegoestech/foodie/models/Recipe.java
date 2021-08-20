@@ -13,15 +13,6 @@ import java.util.Collection;
 @Data
 public class Recipe {
 
-    public Recipe()
-    {
-    }
-
-    public Recipe(String recipeName, Collection<IngredientAmounts> ingredientAmounts) {
-        this.recipeName = recipeName;
-        this.ingredientAmounts = ingredientAmounts;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -42,5 +33,14 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe")
     private Collection<IngredientAmounts> ingredientAmounts;
+
+    public Recipe()
+    {
+    }
+
+    public Recipe(String recipeName, Collection<IngredientAmounts> ingredientAmounts) {
+        this.recipeName = recipeName;
+        this.ingredientAmounts = ingredientAmounts;
+    }
 
 }

@@ -10,22 +10,25 @@ import java.util.Collection;
 @Table
 @Entity
 @Data
-public class Ingredient /*implements Serializable*/ {
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank()
+    @NotBlank
     @Column(unique = true)
     private String ingredientName;
 
-    @NotBlank()
+    @NotBlank
     private String ingredientMeasure;
 
     @JsonIgnore
     @OneToMany(mappedBy = "ingredient")
     private Collection<IngredientAmounts> ingredientAmounts;
 
-    public Ingredient(){};
+    public Ingredient() {
+    }
+
+
 }
