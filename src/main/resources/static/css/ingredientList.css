@@ -13,12 +13,12 @@
     width: fit-content;
 }
 
-h1 {
-    color: #007A43;
-}
-
 body {
     background-color: #c8e6c9;
+}
+
+h1 {
+    color: #007A43;
 }
 
 button {

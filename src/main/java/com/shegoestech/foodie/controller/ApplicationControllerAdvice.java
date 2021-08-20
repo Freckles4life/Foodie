@@ -1,7 +1,5 @@
 package com.shegoestech.foodie.controller;
 
-
-
 import com.shegoestech.foodie.exception.BadRequestException;
 import com.shegoestech.foodie.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +28,6 @@ public class ApplicationControllerAdvice extends ResponseEntityExceptionHandler 
         } else if (e instanceof BadRequestException) {
             httpStatus = HttpStatus.BAD_REQUEST;
         }
-
         response.setStatus(httpStatus.value());
         return e.getMessage();
     }
@@ -50,7 +47,6 @@ public class ApplicationControllerAdvice extends ResponseEntityExceptionHandler 
         for (FieldError err : bindingResult.getFieldErrors()) {
             error.add(err.getField() + " : " + err.getDefaultMessage());
         }
-
         return error;
     }
 }

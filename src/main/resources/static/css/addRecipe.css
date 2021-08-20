@@ -1,30 +1,32 @@
 body {
     background-color: #c8e6c9;
-    }
-    h1 {
+}
+
+h1 {
     color: #007a43;
     text-align: center;
-    }
+}
 
-    .form-check-input {
+.form-check-input {
     background-color: #fff;
     border-color: #388E3C;
 }
+
 .form-check-input:checked {
     border-color: #388E3C;
     background-color: #4CAF50;
-    }
+}
 
 a, a:focus, a:active {
-      text-decoration: none;
-      color: #616161;
+    text-decoration: none;
+    color: #616161;
 }
 
 a:hover {
-text-decoration: underline;
- color: #616161;
+    text-decoration: underline;
+    color: #616161;
 }
 
 p {
- color: #616161;
- }
+    color: #616161;
+}

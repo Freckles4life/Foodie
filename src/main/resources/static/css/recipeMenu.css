@@ -28,21 +28,20 @@
     color: #212121;
 }
 
-  
 body {
 	background-color: #388E3C;
 }
 
 a, a:focus, a:active {
-      text-decoration: none;
-      color: white;
+    text-decoration: none;
+    color: white;
 }
 
 a:hover {
-  text-decoration: underline;
-      color: white;
+    text-decoration: underline;
+    color: white;
 }
 
 .fa-shopping-basket{
-color: white;
+    color: white;
 }

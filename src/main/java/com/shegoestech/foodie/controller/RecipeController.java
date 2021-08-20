@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/recipes")
@@ -82,9 +81,7 @@ public class RecipeController {
                 .filter(r -> r.getType().equals("Dinner"))
                 .collect(Collectors.toList());
 
-
         Random rand = new Random();
-
 
         Recipe randomBreakfast = getRecipe(breakfast, rand);
         Recipe randomLunch = getRecipe(lunch, rand);
@@ -100,7 +97,6 @@ public class RecipeController {
         if (randomDinner.getImage() != null) {
             mv.addObject("dinnerImage", Base64.getEncoder().encodeToString(randomDinner.getImage()));
         }
-
 
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
         recipeService.setFinalMenu(recipeMenu);

@@ -35,6 +35,7 @@ public class IngredientController {
     @Autowired
     private final RecipeController recipeController;
 
+
     @GetMapping("/choose-ingredients")
     public String showIngredients(Model model) {
         model.addAttribute("chooseIngredients", chooseIngredients);
@@ -48,24 +49,6 @@ public class IngredientController {
         return recipeController.showMenu(chooseIngredients);
     }
 
-
-    @GetMapping("/export")
-    public void exportToPdf(HttpServletResponse response) throws IOException {
-        response.setContentType("application/pdf");
-
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=shopping_list_" + currentDateTime + ".pdf";
-
-        response.setHeader(headerKey, headerValue);
-        List<Recipe> randomMenu = recipeService.getFinalMenu();
-
-        ShoppingListExporter exporter = new ShoppingListExporter(randomMenu);
-        exporter.export(response);
-
-    }
 
     @GetMapping("/add-ingredient")
     public String toAddIngredient(Model model, Ingredient ingredient) {
@@ -97,6 +80,25 @@ public class IngredientController {
     @GetMapping("/ingredient-success")
     public String successAdd(Model model, Ingredient ingredient) {
         return "ingredient-success";
+    }
+
+
+    @GetMapping("/export")
+    public void exportToPdf(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=shopping_list_" + currentDateTime + ".pdf";
+
+        response.setHeader(headerKey, headerValue);
+        List<Recipe> randomMenu = recipeService.getFinalMenu();
+
+        ShoppingListExporter exporter = new ShoppingListExporter(randomMenu);
+        exporter.export(response);
+
     }
 
 }

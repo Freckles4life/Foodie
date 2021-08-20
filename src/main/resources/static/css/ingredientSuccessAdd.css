@@ -1,15 +1,14 @@
+body {
+    background-image: url("https://cdn.pixabay.com/photo/2019/05/05/15/11/kiwi-4180811_960_720.jpg");
+}
+
 h1 {
     color: #007A43;
     font-family:"Lucida Handwriting";
     font-size:50px;
 }
+
 a, a:hover, a:focus, a:active {
       text-decoration: none;
       color: inherit;
 }
-
-     body {
-      background-image: url("https://cdn.pixabay.com/photo/2019/05/05/15/11/kiwi-4180811_960_720.jpg");
-
-
-     }

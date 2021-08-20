@@ -25,7 +25,6 @@ public class ShoppingListExporter {
 
     private final List<Recipe> menu;
 
-
     private void writeTableHeader(PdfPTable table) {
 
         PdfPCell cell = new PdfPCell();

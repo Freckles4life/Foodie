@@ -63,18 +63,4 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-
-
-
-
-
-
-
-
-
-
-        //šo iespējams nevajadzēs
-//    public void deleteById(Long id) {
-//        recipeRepository.deleteById(id);
-//    }
 }
