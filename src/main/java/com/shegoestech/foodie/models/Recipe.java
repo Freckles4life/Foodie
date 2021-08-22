@@ -31,7 +31,7 @@ public class Recipe {
     @Column(name = "image", nullable = false)
     private byte[] image;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", orphanRemoval = true, cascade = CascadeType.ALL)
     private Collection<IngredientAmounts> ingredientAmounts;
 
     public Recipe()

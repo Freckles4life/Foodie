@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -62,5 +63,38 @@ public class RecipeService {
     public List<Recipe> getAll() {
         return recipeRepository.findAll();
     }
+
+
+    public Recipe getById(Long id) {
+        return recipeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Recipe not found"));
+    }
+
+
+    public Recipe update(Long id, Recipe recipe) {
+
+
+
+        Recipe updatedRecipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+        Optional<Recipe> oldRecipe = recipeRepository.findById(id);
+
+        updatedRecipe.setRecipeName(recipe.getRecipeName());
+        updatedRecipe.setType(recipe.getType());
+        updatedRecipe.setRecipeInstructions(recipe.getRecipeInstructions());
+
+        if (recipe.getImage() != null){
+            updatedRecipe.setImage(recipe.getImage());
+        } else {
+            updatedRecipe.setImage(oldRecipe.get().getImage());
+        }
+
+        return recipeRepository.save(updatedRecipe);
+    }
+
+    public void deleteRecipeById(Long id) {
+        recipeRepository.deleteById(id);
+    }
+
 
 }

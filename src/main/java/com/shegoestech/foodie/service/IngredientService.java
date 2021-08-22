@@ -21,4 +21,20 @@ public class IngredientService {
         return ingredientRepository.findAll(Sort.by(Sort.Direction.ASC, "ingredientName"));
     }
 
+    public Ingredient getById(Long id) {
+        return ingredientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+    }
+
+
+    public Ingredient update(Long id, Ingredient ingredient) {
+        Ingredient existingIngredient = ingredientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
+
+        existingIngredient.setIngredientName(ingredient.getIngredientName());
+        existingIngredient.setIngredientMeasure(ingredient.getIngredientMeasure());
+
+        return ingredientRepository.save(existingIngredient);
+    }
+
 }

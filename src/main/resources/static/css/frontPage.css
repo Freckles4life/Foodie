@@ -11,6 +11,8 @@ h1 {
 }
 
 button1 {
+    background-color: #007A43;
+    border: none;
     color: #D8DB1A;
     padding: 40px 50px;
     text-align: center;
