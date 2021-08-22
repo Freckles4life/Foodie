@@ -29,7 +29,7 @@
 }
 
 body {
-	background-color: #388E3C;
+	background-color: #198754;
 }
 
 a, a:focus, a:active {
@@ -43,5 +43,14 @@ a:hover {
 }
 
 .fa-shopping-basket{
+    color: white;
+}
+
+.nav-link{
+font-family: 'Oswald', sans-serif;
+}
+
+.nav-link a:hover {
+    text-decoration: none;
     color: white;
 }

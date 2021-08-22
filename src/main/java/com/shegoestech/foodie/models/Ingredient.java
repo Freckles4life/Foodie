@@ -24,7 +24,7 @@ public class Ingredient {
     private String ingredientMeasure;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "ingredient", orphanRemoval = true, cascade = CascadeType.ALL)
     private Collection<IngredientAmounts> ingredientAmounts;
 
     public Ingredient() {

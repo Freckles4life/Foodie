@@ -4,102 +4,118 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/addRecipe.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script th:inline="javascript">
         let ingredients = JSON.parse([[${ingredientsJson}]]);
+
+
+
     </script>
     <script th:src="@{~/js/add-product-button.js}"></script>
     <script th:src="@{~/js/set-units.js}"></script>
 </head>
 
-<body class="container">
-<br>
-<h1>Add instructions of your recipe</h1>
-<form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
-    <div class="mb-3">
-        <b>Type recipe name</b></label>
-        <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name"
-               aria-describedby="emailHelp" required>
-    </div>
-
-    <label class="form-label"><b>Choose type</b></label>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}"
-               th:value="Breakfast">
-        <label class="form-check-label" for="flexRadioDefault1">
-            Breakfast
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" required th:field="*{type}"
-               th:value="Lunch">
-        <label class="form-check-label" for="flexRadioDefault2">
-            Lunch
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="type" id="flexRadioDefault3" required th:field="*{type}"
-               th:value="Dinner">
-        <label class="form-check-label" for="flexRadioDefault3">
-            Dinner
-        </label>
-    </div>
-
-    <div class="mb-3">
-        <br>
-        <label class="form-label"><b>Add Product(s)</b></label>
-        <table class="row g-3" id="input_field">
-            <tbody>
-            <tr>
-                <td class="col-sm-4">
-                    <input type="text" class="form-control product" placeholder="Product" aria-label="Product"
-                           name="ingredient[]" required
-                           list="ingredients" autocomplete="off" id="ingredientInput1"
-                           onchange="fillMeasure('ingredientInput1','units1')"/>
-                    <datalist id="ingredients">
-                        <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
-                    </datalist>
-                </td>
-                <td class="col-sm-2">
-                    <input type="number" class="form-control" name="amount[]" placeholder="Amount"
-                           aria-label="Amount" required/>
-                </td>
-                <td class="col-sm-2">
-                    <input type="text" class="form-control measure" placeholder="Measure"
-                           aria-label="Measure" id="units1"
-                           disabled>
-                </td>
-                <td class="col-sm-2">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <p>Can't find what you need?
-            <a href="/ingredients/add-ingredient">Click here to add new product to the system</a></p>
-        <div>
-            <button type="button" class="btn btn-success" name="add" id="add" value="Add">Add product</button>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">FOODIE</a>
+            </div>
         </div>
     </div>
-
+</nav>
+<div class="container">
     <br>
-    <div class="mb-3">
-        <label for="formFile" class="form-label"><b>Add picture</b></label>
-        <input class="form-control" th:type="file" id="formFile" th:name="imageFile" required>
-    </div>
-
+    <h1>Tell us about your recipe</h1>
     <br>
-    <div class="mb-3">
-        <label for="recipeInstructions" class="form-label"><b>Tell us instructions</b></label>
-        <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5"
-                  th:field="*{recipeInstruction}" required></textarea>
-    </div>
+    <form th:object="${recipe}" method="post" th:action="@{/recipes/add-recipe}" enctype="multipart/form-data">
+        <div class="col-md-5">
+            <b>Recipe's name</b></label>
+            <input type="text" class="form-control" name="recipeName" th:field="*{name}" id="name"
+                   aria-describedby="emailHelp" required>
+        </div>
+        <br>
+        <label class="form-label"><b>Type</b></label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" required th:field="*{type}"
+                   th:value="Breakfast">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Breakfast
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" required th:field="*{type}"
+                   th:value="Lunch">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Lunch
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefault3" required th:field="*{type}"
+                   th:value="Dinner">
+            <label class="form-check-label" for="flexRadioDefault3">
+                Dinner
+            </label>
+        </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
+        <div class="mb-3">
+            <br>
+            <label class="form-label"><b>Product(s)</b></label>
+            <table class="row g-3 col" id="input_field">
+                <tbody>
+                <tr>
+                    <td class="col-md-5">
+                        <input type="text" class="form-control product" placeholder="Product" aria-label="Product"
+                               name="ingredient[]" required
+                               list="ingredients" autocomplete="off" id="ingredientInput1"
+                               onchange="fillMeasure('ingredientInput1','units1')"/>
+                        <datalist id="ingredients">
+                            <option th:each="i : ${ingredients}" th:text="${i.ingredientName}"></option>
+                        </datalist>
+                    </td>
+                    <td class="col-sm-2">
+                        <input type="number" class="form-control" name="amount[]" placeholder="Amount"
+                               aria-label="Amount" required/>
+                    </td>
+                    <td class="col-sm-2">
+                        <input type="text" class="form-control measure" placeholder="Measure"
+                               aria-label="Measure" id="units1"
+                               disabled>
+                    </td>
+                    <td class="col-sm-2">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Can't find what you need? That is because our nutrition experts do not recommend eating it
+            <div>
+                <button type="button" class="btn btn-success" name="add" id="add" value="Add">Add product</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <label for="formFile" class="form-label"><b>Picture</b></label>
+            <input class="form-control" th:type="file" id="formFile" th:name="imageFile" required>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-12">
+            <label for="recipeInstructions" class="form-label"><b>Instructions</b></label>
+            <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5"
+                      th:field="*{recipeInstruction}" required></textarea>
+        </div>
+        <br>
 
-</form>
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
 </body>
 
 </html>

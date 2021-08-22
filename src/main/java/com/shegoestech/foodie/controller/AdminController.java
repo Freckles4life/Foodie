@@ -5,14 +5,15 @@ import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,16 +25,23 @@ import java.util.stream.Collectors;
 public class AdminController {
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
+    private final FoodieController foodieController;
 
+
+    @GetMapping
+    public String adminPanel() {
+        return "admin";
+    }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping
-    public String adminPanel() {
-        return "admin";
+
+    @GetMapping("/logout")
+    public String logoutPage(Model model) {
+        return "redirect:http://localhost:8080/";
     }
 
 
@@ -43,22 +51,6 @@ public class AdminController {
         return "see-ingredients";
     }
 
-//
-//    @GetMapping("/add-ingredient")
-//    public String showIngredientAddPage(Model map, Ingredient ingredient) {
-//        return "add-ingredient";
-//    }
-//
-
-//    @PostMapping("/add-ingredient")
-//    public String addIngredient(@Valid Ingredient ingredient, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "add-ingredient";
-//        }
-//        ingredientService.register(ingredient);
-//        return "see-ingredients";
-//    }
-//
 
     @GetMapping("/add-ingredient")
     public String toAddIngredient(Model model, Ingredient ingredient) {
@@ -80,7 +72,7 @@ public class AdminController {
 
         if (ingredientsToCheckBeforeAdd.isEmpty()) {
             ingredientService.register(ingredient);
-            return showIngredientsToAdmin(model);
+            return "redirect:/admin/see-ingredients";
         }
 
         model.addAttribute("existingIngredientError", "Ingredient with name '" + ingredient.getIngredientName() + "' exists");
@@ -102,9 +94,14 @@ public class AdminController {
             return "edit-ingredient";
         }
         ingredientService.update(id, ingredient);
-        return showIngredientsToAdmin(model);
+        return "redirect:/admin/see-ingredients";
     }
 
+    @GetMapping("/delete-ingredient/{id}")
+    public String deleteIngredientById(@PathVariable("id") Long id, Model model) {
+        ingredientService.deleteIngredientById(id);
+        return "redirect:/admin/see-ingredients";
+    }
 
     @GetMapping("/see-recipes")
     public String showRecipesToAdmin(Model model) {
@@ -127,13 +124,13 @@ public class AdminController {
             return "edit-recipe";
         }
         recipeService.update(id, recipe);
-        return showRecipesToAdmin(model);
+        return "redirect:/admin/see-recipes";
     }
 
     @GetMapping("/delete-recipe/{id}")
     public String deleteRecipeById(@PathVariable("id") Long id, Model model) {
         recipeService.deleteRecipeById(id);
-        return showRecipesToAdmin(model);
+        return "redirect:/admin/see-recipes";
     }
 
 }

@@ -1,5 +1,5 @@
 body {
-    background-color: #c8e6c9;
+    background-color: #f0f2f0;
 }
 
 h1 {
@@ -29,3 +29,7 @@ h1 {
      border-color: #388E3C;
      background-color: #4CAF50;
  }
+
+p {
+    color: #373837
+}

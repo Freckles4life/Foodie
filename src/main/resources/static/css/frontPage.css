@@ -11,6 +11,7 @@ h1 {
 }
 
 button1 {
+    font-family: sans-serif;
     background-color: #007A43;
     border: none;
     color: #D8DB1A;
@@ -26,6 +27,7 @@ button1 {
 }
 
 button2 {
+    font-family: sans-serif;
     background-color: #007A43;
     border: none;
     color: white;
