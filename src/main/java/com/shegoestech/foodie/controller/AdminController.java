@@ -5,15 +5,11 @@ import com.shegoestech.foodie.models.Recipe;
 import com.shegoestech.foodie.service.IngredientService;
 import com.shegoestech.foodie.service.RecipeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +33,6 @@ public class AdminController {
     public String login() {
         return "login";
     }
-
 
     @GetMapping("/logout")
     public String logoutPage(Model model) {
@@ -103,6 +98,7 @@ public class AdminController {
         return "redirect:/admin/see-ingredients";
     }
 
+
     @GetMapping("/see-recipes")
     public String showRecipesToAdmin(Model model) {
         model.addAttribute("recipes", recipeService.getAll());
@@ -134,4 +130,3 @@ public class AdminController {
     }
 
 }
-

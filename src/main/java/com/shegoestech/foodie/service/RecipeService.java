@@ -59,6 +59,7 @@ public class RecipeService {
         return recipeRepository.getById(savedRecipe.getId());
     }
 
+
     public List<Recipe> getAll() {
         return recipeRepository.findAll();
     }
@@ -88,9 +89,9 @@ public class RecipeService {
         return recipeRepository.save(updatedRecipe);
     }
 
+
     public void deleteRecipeById(Long id) {
         recipeRepository.deleteById(id);
     }
-
 
 }

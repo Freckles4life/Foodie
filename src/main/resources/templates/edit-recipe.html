@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     <link rel="stylesheet" type="text/css" href="/css/adminPanel.css">
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
@@ -73,12 +75,12 @@
                 <textarea class="form-control" id="recipeInstructions" name="recipeInstruction" rows="5"
                           th:field="*{recipeInstructions}" required></textarea>
             </div>
+
             <br>
             <button type="submit" class="btn btn-secondary">Submit</button>
         </form>
-
     </div>
 </div>
-
 </body>
+
 </html>
