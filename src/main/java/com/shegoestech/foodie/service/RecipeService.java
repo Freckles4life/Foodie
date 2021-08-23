@@ -56,7 +56,6 @@ public class RecipeService {
         }
 
         ingredientAmountsRepository.saveAll(ingredientAmounts);
-
         return recipeRepository.getById(savedRecipe.getId());
     }
 
@@ -72,9 +71,6 @@ public class RecipeService {
 
 
     public Recipe update(Long id, Recipe recipe) {
-
-
-
         Recipe updatedRecipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ingredient not found"));
         Optional<Recipe> oldRecipe = recipeRepository.findById(id);
