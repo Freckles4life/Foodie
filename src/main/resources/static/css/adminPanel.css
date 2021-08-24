@@ -33,3 +33,8 @@ h1 {
 p {
     color: #373837
 }
+
+td img{
+height: 30vh;
+    object-fit: cover;
+}

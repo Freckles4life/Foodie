@@ -46,7 +46,9 @@
                         <td th:text="${recipe.recipeName}"></td>
                         <td th:text="${recipe.type}"></td>
                         <td th:text="${recipe.recipeInstructions}"></td>
-                        <td th:src="${breakfastImage} == null ? _ : @{'data:image/png;base64,'+${breakfastImage}}"></td>
+                        <td>
+                            <img th:src="${recipe.encodedImage} == null ? _ : @{'data:image/png;base64,'+${recipe.encodedImage}}" />
+                        </td>
                         <td><a th:href="@{/admin/edit-recipe/{id}(id=${recipe.id})}" class="btn btn-secondary"><i
                                 class="fas fa-user-edit ml-2"></i></a></td>
                         <td><a th:href="@{/admin/delete-recipe/{id}(id=${recipe.id})}" class="btn btn-danger"><i

@@ -37,11 +37,11 @@
             <div class="card" style="width: 30vw;" th:each="recipe, iStat : ${recipes}">
                 <div th:switch="${recipe.type}">
                     <img class="card-img" th:case="Breakfast"
-                         th:src="${breakfastImage} == null ? _ : @{'data:image/png;base64,'+${breakfastImage}}"/>
+                         th:src="${recipe.encodedImage} == null ? _ : @{'data:image/png;base64,'+${recipe.encodedImage}}"/>
                     <img class="card-img" th:case="Lunch"
-                         th:src="${lunchImage} == null ? _ : @{'data:image/png;base64,'+${lunchImage}}"/>
+                         th:src="${recipe.encodedImage} == null ? _ : @{'data:image/png;base64,'+${recipe.encodedImage}}"/>
                     <img class="card-img" th:case="Dinner"
-                         th:src="${dinnerImage} == null ? _ : @{'data:image/png;base64,'+${dinnerImage}}"/>
+                         th:src="${recipe.encodedImage} == null ? _ : @{'data:image/png;base64,'+${recipe.encodedImage}}"/>
                 </div>
 
                 <div th:switch="${iStat.index}">

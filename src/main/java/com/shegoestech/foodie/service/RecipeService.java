@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,8 +62,15 @@ public class RecipeService {
 
 
     public List<Recipe> getAll() {
-        return recipeRepository.findAll();
+
+        List<Recipe> recipes = recipeRepository.findAll();
+
+        for (Recipe r :recipes) {
+            r.setEncodedImage(Base64.getEncoder().encodeToString(r.getImage()));
+        }
+        return recipes ;
     }
+
 
 
     public Recipe getById(Long id) {

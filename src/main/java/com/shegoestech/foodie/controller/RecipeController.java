@@ -87,17 +87,6 @@ public class RecipeController {
         Recipe randomLunch = getRecipe(lunch, rand);
         Recipe randomDinner = getRecipe(dinner, rand);
 
-        if (randomBreakfast.getImage() != null) {
-            mv.addObject("breakfastImage", Base64.getEncoder().encodeToString(randomBreakfast.getImage()));
-        }
-        if (randomLunch.getImage() != null) {
-            mv.addObject("lunchImage", Base64.getEncoder().encodeToString(randomLunch.getImage()));
-        }
-
-        if (randomDinner.getImage() != null) {
-            mv.addObject("dinnerImage", Base64.getEncoder().encodeToString(randomDinner.getImage()));
-        }
-
         List<Recipe> recipeMenu = new ArrayList<Recipe>(Arrays.asList(randomBreakfast, randomLunch, randomDinner));
         recipeService.setFinalMenu(recipeMenu);
 

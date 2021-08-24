@@ -31,6 +31,9 @@ public class Recipe {
     @Column(name = "image", nullable = false)
     private byte[] image;
 
+    @Transient
+    private String encodedImage;
+
     @OneToMany(mappedBy = "recipe", orphanRemoval = true, cascade = CascadeType.ALL)
     private Collection<IngredientAmounts> ingredientAmounts;
 
