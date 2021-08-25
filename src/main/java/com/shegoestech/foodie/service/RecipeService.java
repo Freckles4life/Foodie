@@ -72,7 +72,6 @@ public class RecipeService {
     }
 
 
-
     public Recipe getById(Long id) {
         return recipeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Recipe not found"));

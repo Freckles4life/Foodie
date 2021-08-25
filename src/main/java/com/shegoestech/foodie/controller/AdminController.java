@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
     private final FoodieController foodieController;
-
 
     @GetMapping
     public String adminPanel() {
@@ -33,7 +33,6 @@ public class AdminController {
     public String login() {
         return "login";
     }
-
 
     @GetMapping("/logout")
     public String logoutPage(Model model) {
@@ -93,6 +92,7 @@ public class AdminController {
         return "redirect:/admin/see-ingredients";
     }
 
+
     @GetMapping("/delete-ingredient/{id}")
     public String deleteIngredientById(@PathVariable("id") Long id, Model model) {
         ingredientService.deleteIngredientById(id);
@@ -123,6 +123,7 @@ public class AdminController {
         recipeService.update(id, recipe);
         return "redirect:/admin/see-recipes";
     }
+
 
     @GetMapping("/delete-recipe/{id}")
     public String deleteRecipeById(@PathVariable("id") Long id, Model model) {
