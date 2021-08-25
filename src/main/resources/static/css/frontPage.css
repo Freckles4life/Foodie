@@ -42,7 +42,7 @@ button2 {
     max-width: 40%;
 }
 
-a {
+a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: white;
 }

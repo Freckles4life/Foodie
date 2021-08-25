@@ -34,6 +34,7 @@ public class AdminController {
         return "login";
     }
 
+
     @GetMapping("/logout")
     public String logoutPage(Model model) {
         return "redirect:http://localhost:8080/";
